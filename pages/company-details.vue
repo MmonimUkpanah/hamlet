@@ -581,7 +581,7 @@ export default {
     /* background-position: right; */
     /* background-size: center center/cover; */
     /* background-repeat: no-repeat; */
-    height: 100vh;
+    height: auto;
     margin-top: 1.5px !important;
 }
 .bg-big{

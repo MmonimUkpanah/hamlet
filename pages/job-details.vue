@@ -17,7 +17,7 @@
           <form @submit.prevent="addJobDetails">
             <div class="grid">
               <p>Job Title</p>
-              <input type="text" name="job-title" class="one6"  v-model="jobDetails.job_title"
+              <input type="text" name="job-title" class="one6 form-control"  v-model="jobDetails.job_title"
               v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('job-title') }"
                 /><div></div>
@@ -78,7 +78,7 @@
             </div>
             <div class="grid">
               <p>Date Hired</p>
-              <input type="date" name="date-hired" id="" class="one6" v-model="jobDetails.date_hired"
+              <input type="date" name="date-hired" id="" class="one6 form-control" v-model="jobDetails.date_hired"
               v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('date-hired') }"
                 /><div></div>
@@ -91,7 +91,7 @@
             </div>
             <div class="grid">
               <p>Work Location</p>
-              <input type="text" name="work-location" class="one6" v-model="jobDetails.work_location" 
+              <input type="text" name="work-location" class="one6 form-control" v-model="jobDetails.work_location" 
               v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('work-location') }"
                 /><div></div>
@@ -104,7 +104,7 @@
             </div>
             <div class="grid">
               <p>Salary (In Naira)</p>
-              <input  class="one6" name="salary" v-model="jobDetails.salary"
+              <input  class="one6 form-control" name="salary" v-model="jobDetails.salary"
               v-validate="'required|numeric'"
                   :class="{ 'is-invalid': submitted && errors.has('salary') }"
                 /><div></div>
@@ -117,7 +117,7 @@
             </div>
             <div class="grid">
               <p>Job Description</p>
-              <textarea name="description" id=""   cols="10" rows="5" v-model="jobDetails.description"
+              <textarea name="description" id=""  class=" form-control"  cols="10" rows="5" v-model="jobDetails.description"
               v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('description') }"
                 >
@@ -133,7 +133,7 @@
             <div class="grid">
               <p>Job Category</p>
               <div class="input-group">
-                <select class="custom-select one6" id="inputGroupSelect04" name="job-category" aria-label="Example select with button addon" v-model="jobDetails.job_category"
+                <select class="custom-select form-control one6" id="inputGroupSelect04" name="job-category" aria-label="Example select with button addon" v-model="jobDetails.job_category"
                  v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('job-category') }"
                 >

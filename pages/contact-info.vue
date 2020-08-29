@@ -11,7 +11,7 @@
             <form @submit.prevent="addContactInfo">
               <div class="grid">
                 <p>Phone Number</p>
-                <input  name="phone-number" v-model="contactInfo.phone" 
+                <input  name="phone-number" class="form-control" v-model="contactInfo.phone" 
                 v-validate="'numeric|length:11'"
                   :class="{ 'is-invalid': submitted && errors.has('phone-number') }"
                 /><div></div>
@@ -24,7 +24,7 @@
               </div>
               <div class="grid">
                 <p>Email</p>
-                <input type="email" name="contact-email" v-model="contactInfo.email" 
+                <input type="email" name="contact-email" class="form-control" v-model="contactInfo.email" 
                 v-validate="'required|email'"
                 :class="{ 'is-invalid': submitted && errors.has('contact-email') }"><div></div>
                 <small
@@ -36,7 +36,7 @@
               </div>
               <div class="grid">
                 <p>Emergency Contact</p>
-                <input name="emergency-contact" v-model="contactInfo.emergency_contact" 
+                <input name="emergency-contact" class="form-control" v-model="contactInfo.emergency_contact" 
                 v-validate="'numeric|length:11'"
                   :class="{ 'is-invalid': submitted && errors.has('emergency-contact') }"
                 /><div></div>

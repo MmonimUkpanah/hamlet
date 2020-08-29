@@ -12,7 +12,7 @@
               <div class="grid">
 
                 <p>First Name</p>
-                <input type="text" name="first-name" class="one6" v-model="employeeDetails.first_name" 
+                <input type="text" name="first-name" class="one6 form-control" v-model="employeeDetails.first_name" 
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('first-name') }"
                 /><div></div>
@@ -25,7 +25,7 @@
               </div>
               <div class="grid">
                 <p>Other Names</p>
-                <input type="text" class="one6" name="other-names" v-model="employeeDetails.other_names" 
+                <input type="text" class="one6 form-control" name="other-names" v-model="employeeDetails.other_names" 
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('other-names') }"
                 /><div></div>
@@ -39,7 +39,7 @@
               <div class="grid">
                 <p>Gender</p>
                 <div class="input-group">
-                  <select class="custom-select one6" name="gender" id="inputGroupSelect04" aria-label="Example select with button addon"
+                  <select class="custom-select one6 form-control" name="gender" id="inputGroupSelect04" aria-label="Example select with button addon"
                    v-model="employeeDetails.gender"
                   v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('gender') }"
@@ -57,7 +57,7 @@
               </div>
               <div class="grid">
                 <p>Date of Birth</p>
-                <input type="date" name="date_of_birth" id="" class="one6"  v-model="employeeDetails.dob" 
+                <input type="date" name="date_of_birth" id="" class="one6 form-control"  v-model="employeeDetails.dob" 
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('date_of_birth') }"
                 /><div></div>
@@ -70,7 +70,7 @@
               </div>
               <div class="grid">
                 <p>Address</p>
-                <input type="text" class="one6" name="address" v-model="employeeDetails.address"
+                <input type="text" class="one6 form-control" name="address" v-model="employeeDetails.address"
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('address') }"
                 /><div></div>
@@ -83,7 +83,7 @@
               </div>
               <div class="grid">
                 <p>City</p>
-                <input type="text" name="city" class="one6"  v-model="employeeDetails.city" 
+                <input type="text" name="city" class="one6 form-control"  v-model="employeeDetails.city" 
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('city') }"
                 /><div></div>
@@ -96,7 +96,7 @@
               </div>
               <div class="grid">
                 <p>Age</p>
-                <input type="" name="age" class="one6" v-model="employeeDetails.age" 
+                <input type="" name="age" class="one6 form-control" v-model="employeeDetails.age" 
                 v-validate="'numeric'"
                   :class="{ 'is-invalid': submitted && errors.has('age') }"
                 /><div></div>
@@ -109,7 +109,7 @@
               </div>
               <div class="grid">
                 <p>Qualifications</p>
-                <select class="custom-select one6" name="qualifications" id="inputGroupSelect04" aria-label="Example select with button addon" v-model="employeeDetails.qualification" 
+                <select class="custom-select one6 form-control" name="qualifications" id="inputGroupSelect04" aria-label="Example select with button addon" v-model="employeeDetails.qualification" 
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('qualifications') }"
                 >
@@ -133,7 +133,7 @@
               </div>
               <div class="grid">
                 <p>Profile Picture</p>
-                <input type="file" name="profile-picture" class="file-border"  id="" placeholder="" @change="upload()"
+                <input type="file" name="profile-picture" class="file-border "  id="" placeholder="" @change="upload()"
                     v-validate="'required|ext:jpeg,jpg,svg,png'"
                       :class="{ 'is-invalid': submitted && errors.has('profile-picture') }"
                     /><div></div>
