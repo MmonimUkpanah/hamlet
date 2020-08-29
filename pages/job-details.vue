@@ -245,7 +245,7 @@
         if (valid) {
           console.log("Login");
          this.isLoading = false;
-         this.$axios.post("https://hamlet-hrm.herokuapp.com/api/jobdetails", this.jobDetails).then((res) => {
+         this.$axios.post("https://hamlet.payfill.co/api/job-details", this.jobDetails).then((res) => {
           console.log(res.data);
           this.$message({
           message: "You've added your employee's job details!",
@@ -262,7 +262,7 @@
       })},
       getDepartment() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/departments")
+        .get("https://hamlet.payfill.co/api/department")
         .then(res => {
           console.log(res.data);
           this.departments = res.data;this.show = true;

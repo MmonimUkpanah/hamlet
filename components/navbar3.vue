@@ -9,8 +9,13 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+       <!-- <li v-if="$auth.loggedIn">
+      {{auth.user.email}}
+      <span class="ml-3">Log out</span>
+    </li> -->
       <li class="nav-item active">
-        <nuxt-link to="/dashboard" class="nav-link" style="color: #0065FC" >Company Name</nuxt-link>
+        <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+         <span v-else><app-loader /></span>
       </li>
       
     </ul>
@@ -34,7 +39,18 @@
         
            <div class="one1">
             <img src="~/assets/Group 58.png" alt="" style="margin-bottom:2rem">
-            <p><nuxt-link to="/company/companyoverview" style="text-decoration:none; color : #FFFFFF; margin-top:2rem !important"><h5 style="margin-bottom:1rem">Company Overview</h5> </nuxt-link></p>
+            <p><nuxt-link to="/company/company-overview" style="text-decoration:none; color : #FFFFFF; margin-top:2rem !important"><h5 style="margin-bottom:1rem">Company Overview</h5> </nuxt-link></p>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+              <!-- <li v-if="$auth.loggedIn">
+              {{auth.user.email}}
+              <span class="ml-3">Log out</span>
+            </li> -->
+              <li class="nav-item active">
+                <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+                <span v-else><app-loader /></span>
+              </li>
+              
+            </ul>
             <!-- <p><nuxt-link to="/company/taxinfo" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Tax Info</h5></nuxt-link></p>
             <p><nuxt-link to="/company/locations" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Locations</h5></nuxt-link></p> -->
         </div>
@@ -73,7 +89,17 @@ export default {
     closeNav(){
       this.styleObject.width = '0px'
       // console.log('clicked')
-    }
+    },
+    async logOut(){
+      this.loader = false
+     await this.$auth.logout();
+     localStorage.removeItem("jwt");
+    this.$router.push('/signin')
+     this.$message({
+          message:  "You Logged out successfully!",
+          type: 'success'
+        })
+    },
   }
 }
 </script>>

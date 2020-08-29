@@ -108,7 +108,7 @@
         if (valid) {
           console.log("Login");
          this.isLoading = false;
-         this.$axios.post("https://hamlet-hrm.herokuapp.com/api/contactinfo", this.contactInfo).then((res) => {
+         this.$axios.post("https://hamlet.payfill.co/api/contact-info", this.contactInfo).then((res) => {
           console.log(res.data);
           this.$message({
           message: "You've added your employee's contact info!",

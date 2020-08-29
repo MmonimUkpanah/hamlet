@@ -214,7 +214,7 @@ export default {
             formData.append('last_name', this.managerInfo.last_name)
             formData.append('address', this.managerInfo.address)
             formData.append('profile_pic', this.managerInfo.profile_pic)
-             axios.post('https://hamlet-hrm.herokuapp.com/api/profile', formData, {headers : {'Authorization' : `Bearer ${this.user}`}}).then((res)=> {
+             axios.post('https://hamlet.payfill.co/api/profile', formData, {headers : {'Authorization' : `Bearer ${this.user}`}}).then((res)=> {
                 this.$message({
                 message: "Manager Successfully Added!",
                 type: 'success'
