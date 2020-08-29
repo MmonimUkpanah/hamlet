@@ -262,10 +262,10 @@
       })},
       getDepartment() {
       this.$axios
-        .get("https://hamlet.payfill.co/api/department")
+        .get("https://hamlet.payfill.co/api/auth/admin")
         .then(res => {
           console.log(res.data);
-          this.departments = res.data;this.show = true;
+          this.departments = res.data.company.company_departments;this.show = true;
         });
     },
     },
@@ -289,7 +289,7 @@
     border-radius: 5px;
     background: #FFFFFF;
     margin-top: 5rem;
-    height: auto;
+    height: 150vh;
     margin-left: 25%;
   }
   .grid{
@@ -342,7 +342,7 @@
   .one5{
     background: #F9F9F9;
     margin-top: 3.5rem;
-    height: auto;
+    height: 150vh;
   }
   select{
     width:100%;

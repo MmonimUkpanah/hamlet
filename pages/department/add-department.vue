@@ -169,7 +169,7 @@ export default {
     return {
       company: {},
       user: {},
-      dept : [],
+      dept : {},
       loader: true,
       loader2: true,
       isLoading: true,
@@ -185,8 +185,6 @@ export default {
   },
   mounted() {
     this.user = this.$auth.$storage.getLocalStorage("jwt");
-    this.dept = this.$auth.$storage.getLocalStorage("user").id
-
      this.getCompany();
     this.getDepartment();
   },
@@ -204,6 +202,8 @@ export default {
         .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
+          // this.dept = res.data.company.id
+          // console.log(this.dept)
           this.loader = false;
         })
         .catch(() => {
@@ -247,11 +247,11 @@ export default {
 
     getDepartment() {
       this.$axios
-        .get(`https://hamlet.payfill.co/api/department/${this.dept}`, { header: {"Authorization": `Bearer ${this.user}` } })
+        .get("https://hamlet.payfill.co/api/auth/admin")
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.company.company_departments);
           this.loader2 = false;
-          this.departments = res.data;
+          this.departments = res.data.company.company_departments;
         })
         .catch((error) => {
           console.error(error);
