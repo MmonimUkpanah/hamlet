@@ -28,17 +28,18 @@ export default {
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
-        href: "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        href:
+          "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       },
       {
         rel: "stylesheet",
         type: "font",
         href: "https://fonts.googleapis.com/css2?family=Overpass&display=swap",
-        rel : "stylesheet"
+        rel: "stylesheet"
       },
       {
-        href : "https://unpkg.com/element-ui/lib/theme-chalk/index.css",
-        rel : "stylesheet"
+        href: "https://unpkg.com/element-ui/lib/theme-chalk/index.css",
+        rel: "stylesheet"
       }
       // {
       //   rel: "stylesheet",
@@ -61,7 +62,7 @@ export default {
         type: "text/javascript"
       },
       {
-        scr : "https://unpkg.com/element-ui/lib/index.js",
+        scr: "https://unpkg.com/element-ui/lib/index.js",
         type: "text/javascript"
       }
       // {
@@ -90,7 +91,7 @@ export default {
     {
       src: "./plugins/element-ui.js",
       ssr: false
-    },
+    }
     // {
     //   src: "./plugins/vuetify.js",
     //   ssr: false
@@ -133,7 +134,7 @@ export default {
     ]
   ],
   axios: {
-    baseURL: "https://hamlet-hrm.herokuapp.com/api"
+    baseURL: "https://hamlet.payfill.co/api"
     // requestInterceptor: (config, { store }) => {
     //    config.headers.common['Authorization'] = `Bearer ${store.getters['auth/token']}`;
     // }

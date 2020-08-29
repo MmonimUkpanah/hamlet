@@ -8,10 +8,9 @@
         <div>
           <div class="one6">
             <div class="one7">
-              
-                <!-- {{user}} -->
-               
-                <div v-if="loader" class="text-center">
+              <!-- {{user}} -->
+
+              <div v-if="loader" class="text-center">
                 <span disabled>
                   <span
                     class="spinner-border text-primary spinner-border-sm"
@@ -20,19 +19,15 @@
                   ></span>
                 </span>
               </div>
-             <div v-else>
-               <span class="one9 float-right">
-               <nuxt-link to="/dashboard">
-                <button class="btn1">Back</button>
-                </nuxt-link>
-              </span>
-              <h2>{{this.company.company_name}}</h2>
-              <p
-              >Total Headcount: {{this.company.no_of_employees}} | Services: {{this.company.services}}</p>
-             </div>
-              
-      
-                  
+              <div v-else>
+                <span class="one9 float-right">
+                  <nuxt-link to="/dashboard">
+                    <button class="btn1">Back</button>
+                  </nuxt-link>
+                </span>
+                <h2>{{this.company.company_name}}</h2>
+                <p>Total Headcount: {{this.company.no_of_employees}} | Services: {{this.company.services}}</p>
+              </div>
             </div>
           </div>
 
@@ -225,7 +220,7 @@ export default {
                 message: "Department Successfully Added!",
                 type: "success",
               });
-              this.reload()
+              this.reload();
               // this.departmentInfo.name = ""
               this.isLoading = true;
             })
