@@ -38,8 +38,8 @@
             </div>
         
            <div class="one1">
-            <p><nuxt-link to="/single-employee/personal-info" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Personal Info</h5> </nuxt-link></p>
-            <p><nuxt-link to="/single-employee/employmentdetails" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Employment Info and Compensation</h5></nuxt-link></p>
+            <p><nuxt-link to="/department/add-department" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Add Department</h5> </nuxt-link></p>
+            
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
        <!-- <li v-if="$auth.loggedIn">
       {{auth.user.email}}

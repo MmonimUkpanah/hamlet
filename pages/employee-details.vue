@@ -113,7 +113,10 @@
                 v-validate="'required'"
                   :class="{ 'is-invalid': submitted && errors.has('qualifications') }"
                 >
-                
+                    <option value="Primary School Leaving Certificate">Primary School Leaving Certificate</option>
+                    <option value="JSCE">JSCE</option>
+                    <option value="NECO">NECO</option>
+                   <option value="WAEC">WAEC</option>
                     <option value="OND">OND</option>
                     <option value="HND">HND</option>
                     <option value="Bsc">Bsc</option>
@@ -216,7 +219,7 @@
         formData.append('age', this.employeeDetails.age)
         formData.append('qualification', this.employeeDetails.qualification)
         formData.append('profile_pic', this.employeeDetails.profile_pic)
-        this.$axios.post("https://hamlet-hrm.herokuapp.com/api/employee", formData).then((res)=>{
+        this.$axios.post("https://hamlet.payfill.co/api/employee", formData).then((res)=>{
           console.log(res.data);
          this.$message({
           message: "You've added your employee's personal details!",

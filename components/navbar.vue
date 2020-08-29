@@ -2,7 +2,7 @@
 <div class="boxShadow shadow fixed-top">
    <div class="one desktopView">
         <nav class="navbar navbar-expand-lg navbar-light ">
-  <nuxt-link to="/"><a class="navbar-brand" href="#" style="color: #0065FC">Hamlet</a></nuxt-link>
+  <nuxt-link to="/dashboard"><a class="navbar-brand" href="#" style="color: #0065FC">Hamlet</a></nuxt-link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -45,6 +45,17 @@
             <p><nuxt-link to="/contactinfo" style="text-decoration:none; color : #FFFFFF;">Employee Details</nuxt-link></p>
             <p><nuxt-link to="/employmenttype" style="text-decoration:none;  color : #FFFFFF">Contact Information</nuxt-link></p>
             <p><nuxt-link to="/jobdetails" style="text-decoration:none;  color : #FFFFFF">Job Details</nuxt-link></p>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+       <!-- <li v-if="$auth.loggedIn">
+      {{auth.user.email}}
+      <span class="ml-3">Log out</span>
+    </li> -->
+      <li class="nav-item active">
+        <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+         <span v-else><app-loader /></span>
+      </li>
+      
+    </ul>
         </div>
          
           </div>

@@ -448,7 +448,7 @@ export default {
            this.companyInfo.state === '' || this.companyInfo.zip_code === '') {
           swal({
                   title: "Oops!",
-                  text: "feilds cannot be empty!",
+                  text: "fields cannot be empty!",
                   icon: "error",
                   button: false,
                   timer : 1000
@@ -503,10 +503,10 @@ export default {
       formData.append("company_logo", this.companyInfo.profile_pic);
       formData.append("company_phone", this.companyInfo.company_phone);
       axios
-        .post("https://hamlet-hrm.herokuapp.com/api/company", formData, {
+        .post("https://hamlet.payfill.co/api/company", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${this.user}`,
+            "Authorization": `Bearer ${this.user}`,
           },
         })
         .then((res) => {

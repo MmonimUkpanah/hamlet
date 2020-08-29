@@ -150,7 +150,7 @@
 
 <script>
 import sidebar from "~/components/sidebar4.vue";
-import navbar from "~/components/navbar.vue";
+import navbar from "~/components/navbar5.vue";
 import swal from "sweetalert";
 import newLoader from "~/components/loader.vue";
 export default {
@@ -164,6 +164,7 @@ export default {
     return {
       company: {},
       user: {},
+      dept : [],
       loader: true,
       loader2: true,
       isLoading: true,
@@ -179,6 +180,10 @@ export default {
   },
   mounted() {
     this.user = this.$auth.$storage.getLocalStorage("jwt");
+    this.dept = this.$auth.$storage.getLocalStorage("user").id
+
+     this.getCompany();
+    this.getDepartment();
   },
   methods: {
     reload() {
@@ -190,7 +195,7 @@ export default {
     },
     getCompany() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+        .get("https://hamlet.payfill.co/api/auth/admin")
         .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
@@ -210,8 +215,8 @@ export default {
           this.isLoading = false;
           this.$axios
             .post(
-              "https://hamlet-hrm.herokuapp.com/api/department",
-              this.departmentInfo
+              "https://hamlet.payfill.co/api/department",
+              this.departmentInfo, { header: { Authorization: `Bearer ${this.user}` } }
             )
             .then((res) => {
               console.log(res.data);
@@ -237,7 +242,7 @@ export default {
 
     getDepartment() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/departments")
+        .get(`https://hamlet.payfill.co/api/department/${this.dept}`, { header: {"Authorization": `Bearer ${this.user}` } })
         .then((res) => {
           console.log(res.data);
           this.loader2 = false;
@@ -269,7 +274,7 @@ export default {
                 this.isLoading_1 = false;
                 this.$axios
                   .put(
-                    `https://hamlet-hrm.herokuapp.com/api/updatedepartment/${i}`,
+                    `https://hamlet.payfill.co/api/department/${i}`,
                     this.departmentInfo,
                     { header: { Authorization: `Bearer ${this.user}` } }
                   )
@@ -325,11 +330,6 @@ export default {
       //     this.loader = false;
       //   });
     },
-  },
-
-  mounted() {
-    this.getCompany();
-    this.getDepartment();
   },
 };
 </script>

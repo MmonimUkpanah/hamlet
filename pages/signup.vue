@@ -172,7 +172,7 @@ export default {
                 }
             });
              try {
-            let response = await this.$axios.post('https://hamlet-hrm.herokuapp.com/api/auth/signup',this.signUp)
+            let response = await this.$axios.post('https://hamlet.payfill.co/api/auth/signup',this.signUp)
             let token = response.data.token
             this.$auth.$storage.setLocalStorage('jwt', token);
         // localStorage.setItem("jwt", token);
@@ -198,7 +198,7 @@ export default {
         this.error = e.res;
          if (e.response.status === 422) {
           this.$message({
-            message: "Sorry, Email as been taken",
+            message: "Sorry, Email has been taken",
             type: "error"
           });
         }

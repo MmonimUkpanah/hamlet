@@ -153,9 +153,9 @@
 </template>
 
 <script>
-import sidebar from "~/components/sidebar3.vue";
+import sidebar from "~/components/sidebar.vue";
 import VueJwtDecode from "vue-jwt-decode";
-import navbar from "~/components/navbar.vue";
+import navbar from "~/components/navbar3.vue";
 import swal from "sweetalert";
 import newLoader from "~/components/loader.vue";
 export default {
@@ -228,9 +228,9 @@ export default {
             formData.append("company_phone", this.companyInfo.company_phone);
             this.$axios
               .post(
-                `https://hamlet-hrm.herokuapp.com/api/updatecompany/${i}`,
+                `https://hamlet.payfill.co/api/company/${i}`,
                 formData,
-                { headers: { Authorization: `Bearer ${this.user}` } }
+                { headers: { "Authorization": `Bearer ${this.user}` } }
               )
               .then(
                 (res) => {
@@ -262,7 +262,7 @@ export default {
     },
     getCompany() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+        .get("https://hamlet.payfill.co/api/auth/admin")
         .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
