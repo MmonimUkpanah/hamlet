@@ -63,14 +63,16 @@
     <!-- global brand start -->
     <section>
       <div class="pb-5" style="background-color : rgba(220, 234, 255, 0.5); text-align : center">
-        <div class="container">
+        <div class>
           <div class="brand-text pt-5 mt-2">TRUSTED BY GLOBAL BRANDS</div>
-          <div class="mt-5 mb-5">
-            <img src="/img/access.jpeg" class="mt-1" alt srcset width="200px" height="100px" />
-            <img src="/img/ibomair.png" class="mt-1" alt srcset width="200px" height="100px" />
-            <img src="/img/corrywise.png" class="mt-1" alt srcset width="200px" height="100px" />
-            <img src="/img/hotelsng.png" class="mt-1" alt srcset width="200px" height="100px" />
-            <img src="/img/flutter.png" class="mt-1" alt srcset width="200px" height="100px" />
+          <div class="mt-5 mb-5 text-center">
+            <marquee behavior direction>
+              <img src="/img/access.jpeg" class="mt-1" alt srcset width="200px" height="100px" />
+              <img src="/img/ibomair.png" class="mt-1" alt srcset width="200px" height="100px" />
+              <img src="/img/corrywise.png" class="mt-1" alt srcset width="200px" height="100px" />
+              <img src="/img/hotelsng.png" class="mt-1" alt srcset width="200px" height="100px" />
+              <img src="/img/flutter.png" class="mt-1" alt srcset width="200px" height="100px" />
+            </marquee>
           </div>
         </div>
       </div>
@@ -198,9 +200,9 @@ export default {
   height: 120vh;
   margin-top: 4rem;
 }
-.nav-item {
+/* .nav-item {
   margin-right: 5rem !important;
-}
+} */
 .grid {
   padding: 15rem 100px;
   display: grid;
