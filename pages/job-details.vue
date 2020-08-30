@@ -175,8 +175,8 @@
 
             <hr>
             <div class="one4">
-              <nuxt-link to="/contact-info"><button class="btn1">Back</button></nuxt-link>
-              <button type="submit" class="btn2">
+              <!-- <nuxt-link to="/contact-info"><button class="btn1">Back</button></nuxt-link> -->
+              <button type="submit"  class="btn2">
                 <span v-if="isLoading">Submit</span>
                 <app-loader v-else />
               </button>
