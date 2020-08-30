@@ -25,21 +25,6 @@
                     <i class="fa fa-plus" style="font-weight : 300"></i>
                   </div>
                 </nuxt-link>
-<<<<<<< HEAD
-              </div>
-              <div v-for="(employee, id) in employees" :key="id">
-                <div>
-                  <img
-                    :src="employee.profile_pic"
-                    alt
-                    class="rounded-circle"
-                    width="80px"
-                    height="80px"
-                    style="margin-top:3rem; margin-left:1rem"
-                  />
-                  <div class="text-center mt-2" style="font-weight : ">{{employee.first_name}}</div>
-                </div>
-=======
               </div> -->
               <div class="row mt-5">
                 <nuxt-link to="/employee-details">
@@ -58,7 +43,6 @@
                     ...
                   </div>
                 </nuxt-link>
->>>>>>> 632bc9c24b2dc7f96f59aeb6a033c6f49ea70591
               </div>
             </div>
 
@@ -137,7 +121,6 @@ export default {
         .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
-<<<<<<< HEAD
           let newarray = res.data.employees;
           const n = 10;
           this.employees = newarray.splice(0, 10);
