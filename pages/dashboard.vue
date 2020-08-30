@@ -15,33 +15,46 @@
             <h2>Hello {{ this.profile.first_name }}</h2>
             <!-- <h2 v-else>Hello Welcome</h2> -->
             <h6 class="mt-4">Welcome to Hamlet!</h6>
-            <!-- <p class="mt-4">Task!</p>
-            <div class="border-admin">Design a new landing page for elaxx</div>-->
+            <p class="mt-4">Task!</p>
+            <div class="border-admin">Signing Up for the first time? Please add Department</div>
             <!-- Add user / list of users -->
-            <div class="">
+            <div class>
               <!-- <div>
                 <nuxt-link to="/employee-details">
                   <div class="circle-name-1">
                     <i class="fa fa-plus" style="font-weight : 300"></i>
                   </div>
                 </nuxt-link>
-              </div> -->
+              </div>-->
               <div class="row mt-5">
                 <nuxt-link to="/employee-details">
                   <div class="circle-name-1">
                     <i class="fa fa-plus" style="font-weight : 300"></i>
                   </div>
                 </nuxt-link>
-                  <div v-for="(employee, id) in employees" class="define" :key="id" style="text-align:center">
-                    <div> 
-                      <img :src="employee.profile_pic" alt class="rounded-circle" width="80px" height="80px" style="margin-top:1rem; margin-left:.5rem" />
-                    <div class="text-center ml-2 mt-2" style="font-size:1rem ">{{employee.first_name}}</div>
-                    </div>
+                <div
+                  v-for="(employee, id) in employees"
+                  class="define"
+                  :key="id"
+                  style="text-align:center"
+                >
+                  <div>
+                    <img
+                      :src="employee.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="80px"
+                      height="80px"
+                      style="margin-top:1rem; margin-left:.5rem"
+                    />
+                    <div
+                      class="text-center ml-2 mt-2"
+                      style="font-size:1rem "
+                    >{{employee.first_name}}</div>
+                  </div>
                 </div>
                 <nuxt-link to="/all-employees">
-                  <div class="circle-name-1">
-                    ...
-                  </div>
+                  <div class="circle-name-1">...</div>
                 </nuxt-link>
               </div>
             </div>
@@ -121,16 +134,10 @@ export default {
         .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
-          let newarray = res.data.employees;
-          const n = 10;
-          this.employees = newarray.splice(0, 10);
-          this.employees.sort();
-=======
-          let newArray = res.data.employees ;
-          let n = 10
-          this.employees = newArray.splice(0, n)
-          console.log(this.employees)
->>>>>>> 632bc9c24b2dc7f96f59aeb6a033c6f49ea70591
+          let newArray = res.data.employees;
+          let n = 10;
+          this.employees = newArray.splice(0, n);
+          console.log(this.employees);
           this.profile = res.data.profile;
           this.loader = false;
         });
@@ -162,13 +169,11 @@ export default {
 .bg-color {
   /* margin: 0 5rem 0 0 !important; */
   padding: 10rem 2rem 2rem 5rem;
-  
+
   height: auto;
-  
 }
 .box-logo {
   /* padding: 4.5rem; */
-
   border: 1px solid #64a2ff;
   color: #000000;
   background-color: rgb(255, 255, 255);
@@ -205,7 +210,7 @@ export default {
 .circle-name-1 {
   margin-top: 1rem;
   padding: 1rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   /* border: 1px solid red; */
   background-color: #64a2ff;
   width: 80px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="boxShadowV shadow fixed-top bg-white">
+    <div class="boxShadowV fixed-top bg-white">
       <!-- desktop view -->
       <div class="oneV desktopViewV">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -20,16 +20,29 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                <nuxt-link to="/signin" class="nav-link">
-                  <button class="btn1V">Sign In</button>
-                </nuxt-link>
+                <a class="nav-link" href="#">
+                  Home
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
               <li class="nav-item">
-                <nuxt-link to="/signup" class="nav-link" href="#">
-                  <button class="btn2V">Get Started</button>
-                </nuxt-link>
+                <a class="nav-link nav-new" href="#">Service</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-new" href="#">Faq</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-new" href="#">Teams</a>
               </li>
             </ul>
+            <form class="form-inline ml-auto my-2 my-lg-0">
+              <nuxt-link to="/signin" class="nav-link">
+                <button class="btn1V">Sign In</button>
+              </nuxt-link>
+              <nuxt-link to="/signup" class="nav-link" href="#">
+                <button class="btn2V">Get Started</button>
+              </nuxt-link>
+            </form>
           </div>
         </nav>
       </div>
@@ -102,6 +115,12 @@ export default {
 .oneV {
   margin-left: 100px;
   margin-right: 100px;
+}
+.nav-item {
+  margin-left: 2rem;
+}
+.nav-new {
+  color: #9bb2be !important;
 }
 a {
   color: #0065fc !important;
