@@ -5,21 +5,18 @@
       <div class="container">
         <div class="row bg-color">
           <div class="col-sm-3">
-            
-              <img :src="this.company.company_logo" alt class="w-100" />
+            <img :src="this.company.company_logo" alt class="w-100" />
             <span v-if="loader" class="text-center">
               <app-loader />
             </span>
-            <h4 v-else class="text-center mt-2">
-              {{ this.company.company_name }}
-            </h4>
+            <h4 v-else class="text-center mt-2">{{ this.company.company_name }}</h4>
           </div>
           <div class="col-sm-7">
-            <h2>Hello  {{ this.profile.first_name }}</h2>
+            <h2>Hello {{ this.profile.first_name }}</h2>
             <!-- <h2 v-else>Hello Welcome</h2> -->
             <h6 class="mt-4">Welcome to Hamlet!</h6>
             <!-- <p class="mt-4">Task!</p>
-            <div class="border-admin">Design a new landing page for elaxx</div> -->
+            <div class="border-admin">Design a new landing page for elaxx</div>-->
             <!-- Add user / list of users -->
             <div class="d-flex">
               <div>
@@ -30,10 +27,17 @@
                 </nuxt-link>
               </div>
               <div v-for="(employee, id) in employees" :key="id">
-                <div> <img :src="employee.profile_pic" alt class="rounded-circle" width="80px" height="80px" style="margin-top:3rem; margin-left:1rem" />
-                <div class="text-center mt-2" style="font-weight : ">{{employee.first_name}}</div>
+                <div>
+                  <img
+                    :src="employee.profile_pic"
+                    alt
+                    class="rounded-circle"
+                    width="80px"
+                    height="80px"
+                    style="margin-top:3rem; margin-left:1rem"
+                  />
+                  <div class="text-center mt-2" style="font-weight : ">{{employee.first_name}}</div>
                 </div>
-                  
               </div>
             </div>
 
@@ -86,15 +90,15 @@ export default {
   //   middleware: ["authenticated"],
   components: {
     "app-navbar": navbar,
-    "app-loader": newLoader
+    "app-loader": newLoader,
   },
   data() {
     return {
       user: {},
       company: {},
-      profile : {},
+      profile: {},
       loader: true,
-       employees: [],
+      employees: [],
     };
   },
   //   computed: {
@@ -109,10 +113,13 @@ export default {
     getCompany() {
       this.$axios
         .get("https://hamlet.payfill.co/api/auth/admin")
-        .then(res => {
+        .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
-          this.employees = res.data.employees;
+          let newarray = res.data.employees;
+          const n = 10;
+          this.employees = newarray.splice(0, 10);
+          this.employees.sort();
           this.profile = res.data.profile;
           this.loader = false;
         });
@@ -129,7 +136,7 @@ export default {
   },
   created() {
     // this.getCompany();
-  }
+  },
 };
 </script>
 
