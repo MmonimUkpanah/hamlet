@@ -5,46 +5,56 @@
       <div class="container">
         <div class="row bg-color">
           <div class="col-sm-3">
-            
-              <img :src="this.company.company_logo" alt class="w-100" />
+            <img :src="this.company.company_logo" alt class="w-100" />
             <span v-if="loader" class="text-center">
               <app-loader />
             </span>
-            <h4 v-else class="text-center mt-2">
-              {{ this.company.company_name }}
-            </h4>
+            <h4 v-else class="text-center mt-2">{{ this.company.company_name }}</h4>
           </div>
           <div class="col-sm-7">
-            <h2>Hello  {{ this.profile.first_name }}</h2>
+            <h2>Hello {{ this.profile.first_name }}</h2>
             <!-- <h2 v-else>Hello Welcome</h2> -->
             <h6 class="mt-4">Welcome to Hamlet!</h6>
-            <!-- <p class="mt-4">Task!</p>
-            <div class="border-admin">Design a new landing page for elaxx</div> -->
+            <p class="mt-4">Task!</p>
+            <div class="border-admin">Signing Up for the first time? Please add Department</div>
             <!-- Add user / list of users -->
-            <div class="">
+            <div class>
               <!-- <div>
                 <nuxt-link to="/employee-details">
                   <div class="circle-name-1">
                     <i class="fa fa-plus" style="font-weight : 300"></i>
                   </div>
                 </nuxt-link>
-              </div> -->
+              </div>-->
               <div class="row mt-5">
                 <nuxt-link to="/employee-details">
                   <div class="circle-name-1">
                     <i class="fa fa-plus" style="font-weight : 300"></i>
                   </div>
                 </nuxt-link>
-                  <div v-for="(employee, id) in employees" class="define" :key="id" style="text-align:center">
-                    <div> 
-                      <img :src="employee.profile_pic" alt class="rounded-circle" width="80px" height="80px" style="margin-top:1rem; margin-left:.5rem" />
-                    <div class="text-center ml-2 mt-2" style="font-size:1rem ">{{employee.first_name}}</div>
-                    </div>
+                <div
+                  v-for="(employee, id) in employees"
+                  class="define"
+                  :key="id"
+                  style="text-align:center"
+                >
+                  <div>
+                    <img
+                      :src="employee.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="80px"
+                      height="80px"
+                      style="margin-top:1rem; margin-left:.5rem"
+                    />
+                    <div
+                      class="text-center ml-2 mt-2"
+                      style="font-size:1rem "
+                    >{{employee.first_name}}</div>
+                  </div>
                 </div>
                 <nuxt-link to="/all-employees">
-                  <div class="circle-name-1">
-                    ...
-                  </div>
+                  <div class="circle-name-1">...</div>
                 </nuxt-link>
               </div>
             </div>
@@ -98,15 +108,15 @@ export default {
   //   middleware: ["authenticated"],
   components: {
     "app-navbar": navbar,
-    "app-loader": newLoader
+    "app-loader": newLoader,
   },
   data() {
     return {
       user: {},
       company: {},
-      profile : {},
+      profile: {},
       loader: true,
-       employees: [],
+      employees: [],
     };
   },
   //   computed: {
@@ -121,13 +131,13 @@ export default {
     getCompany() {
       this.$axios
         .get("https://hamlet.payfill.co/api/auth/admin")
-        .then(res => {
+        .then((res) => {
           console.log(res.data.company);
           this.company = res.data.company;
-          let newArray = res.data.employees ;
-          let n = 10
-          this.employees = newArray.splice(0, n)
-          console.log(this.employees)
+          let newArray = res.data.employees;
+          let n = 10;
+          this.employees = newArray.splice(0, n);
+          console.log(this.employees);
           this.profile = res.data.profile;
           this.loader = false;
         });
@@ -144,7 +154,7 @@ export default {
   },
   created() {
     // this.getCompany();
-  }
+  },
 };
 </script>
 
@@ -159,13 +169,11 @@ export default {
 .bg-color {
   /* margin: 0 5rem 0 0 !important; */
   padding: 10rem 2rem 2rem 5rem;
-  
+
   height: auto;
-  
 }
 .box-logo {
   /* padding: 4.5rem; */
-
   border: 1px solid #64a2ff;
   color: #000000;
   background-color: rgb(255, 255, 255);
@@ -202,7 +210,7 @@ export default {
 .circle-name-1 {
   margin-top: 1rem;
   padding: 1rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   /* border: 1px solid red; */
   background-color: #64a2ff;
   width: 80px;

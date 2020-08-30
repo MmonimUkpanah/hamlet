@@ -13,7 +13,18 @@
       {{auth.user.email}}
       <span class="ml-3">Log out</span>
     </li> -->
-      <li class="nav-item active">
+     <li class="nav-item active">
+      
+        <img
+                      :src="this.profile_pic.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="50px"
+                      height="50px"
+                      style="margin-left:.5rem"
+           />
+      </li>
+      <li class="nav-item active mt-1">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
          <span v-else><app-loader /></span>
       </li>
@@ -77,12 +88,24 @@ import newLoader from "~/components/loader.vue";
 export default {
   data(){
     return{
+      profile_pic : {},
      styleObject : {
        width : '0px'
      },loader : true
     }
   },
+ mounted(){
+      this.getProfile()
+  },
   methods : {
+    getProfile(){
+         this.$axios
+        .get("https://hamlet.payfill.co/api/auth/admin")
+        .then((res) => {
+          console.log(res.data.profile);
+          this.profile_pic = res.data.profile;
+        });
+    },
     openNav(){
       this.styleObject.width = '100%'
     },
@@ -111,6 +134,9 @@ export default {
     .boxShadow{
        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
         background-color: rgba(255,255,255,1) !important;
+    }
+    ul li{
+      margin-left: 1.5rem;
     }
     .one{
         margin-left: 100px;
