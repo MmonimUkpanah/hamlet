@@ -151,7 +151,7 @@ export default {
     },
     getEmployees() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+        .get("https://hamlet.payfill.co/api/auth/admin")
         .then(res => {
           console.log(res.data.employees);
           this.employees = res.data.employees;
@@ -162,7 +162,7 @@ export default {
       this.$router.push("/single-employee/personal-info")
     }
   },
-  created() {
+  mounted() {
     this.getEmployees()
   }
 };

@@ -91,7 +91,7 @@ export default {
     },
     methods:{
         getEmployee(){
-            this.$axios.get(`https://hamlet-hrm.herokuapp.com/api/employees/${this.$route.params.name}`).then(res => {
+            this.$axios.get(`https://hamlet.payfill.co/api/employee/${this.$route.params.name}`).then(res => {
               this.employee=res.data
         });
         },

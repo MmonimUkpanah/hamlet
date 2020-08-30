@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import sidebar from "~/components/sidebar.vue";
+import sidebar from "~/components/sidebar3.vue";
 import VueJwtDecode from "vue-jwt-decode";
 import navbar from "~/components/navbar3.vue";
 import swal from "sweetalert";
