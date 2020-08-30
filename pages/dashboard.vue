@@ -74,7 +74,7 @@
                       <i class="fa fa-building"></i>
                     </div>
                   </nuxt-link>
-                  <p class="mt-2 text-center">Department</p>
+                  <p class="mt-2 text-center">Departments</p>
                 </div>
                 <!-- <div class="col-sm-4">
                                <nuxt-link to=""><div class="box-icon"><i class="fa fa-times"></i></div></nuxt-link> 

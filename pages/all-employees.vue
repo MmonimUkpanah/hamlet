@@ -14,7 +14,13 @@
 
                 </div>
       </div>
-      <div class="card">
+      <div v-if="loader" class="text-center">
+                  <span disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+                </span>
+              </div>
+      <div class="card" v-else>
         <div class="card-body">
           <div class="row">
             <div class="col-sm-2 pt-4 pb-4 add-border">
@@ -98,12 +104,7 @@
                       </td>
                 </tr>
               </table>
-              <div v-if="loader" class="text-center">
-                  <span disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-                </span>
-              </div>
+              
 
             </div>
           </div>
