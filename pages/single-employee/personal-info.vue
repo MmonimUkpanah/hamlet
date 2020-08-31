@@ -39,7 +39,7 @@
       </div>
   </div>
 
-       <div   id="Personal"  >
+       <div id="Personal"  >
       <div    class="one3" v-for="(data, index) in employee" :key="index">
         <h3>Personal Info</h3>
         <hr>
@@ -69,7 +69,7 @@
 
 
        <div id="Job" style="display: none;"   >
-      <div class="one3" v-for="(data, index) in employee[0].job_details" :key="index">
+      <div class="one3">
         <h3>Job Details</h3>
         <hr>
       <div class="grid">
@@ -111,9 +111,8 @@
       <hr>
   </div>
       </div>
-       <div id="Contact"   style="display: none;" > 
-
-    <div class="one3" v-for="(data, index) in employee[0].contactInfo" :key="index">
+       <div id="Contact"   style="display: none;" >
+    <div class="one3">
       <h3>Contact Info</h3>
       <hr>
       <div class="grid">
@@ -128,7 +127,6 @@
           <p>Emergency Contact</p>
           <p>{{data.emergency_contact}}</p>
       </div>
-
 
       <hr>
   </div>
@@ -156,7 +154,9 @@ export default {
 
     data() {
       return {
-        employee:{},
+        employee:[],
+        job:[],
+        contact:[],
         styleObject : {
        width : '0px'
      }
@@ -165,11 +165,10 @@ export default {
     mounted(){
       this.$axios.get(`http://localhost:9000/api/getemployee/${this.$route.params.name}`).then(res => {
               this.employee=res.data
+              this.job=res.data[0].job_details
+              this.contact=res.data[0].contact_info
         });
     },
-beforeMount() {
-
-},
     methods:{
 
         openNav(){
