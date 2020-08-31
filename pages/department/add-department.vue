@@ -1,5 +1,4 @@
 <template>
- 
   <div>
     <app-navbar />
     <div class="row one5">
@@ -43,7 +42,7 @@
           </div>
           <div v-else>
             <div v-if="editDepartment">
-              <form class="form-inline" @submit.prevent="updateDepartment(departmentInfo.id)"> 
+              <form class="form-inline" @submit.prevent="updateDepartment(departmentInfo.id)">
                 <div>
                   <div class="one3">
                     <div>
@@ -71,7 +70,6 @@
                         </span>
                       </span>
                     </div>
- 
                     <hr />
                   </div>
                 </div>
@@ -147,7 +145,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -192,25 +190,22 @@ export default {
         clearTimeout(timeout);
         timeout = setTimeout("location.reload(true", 6000);
       }
-    }, 
-    methods: {
-        getCompany() {
-        this.$axios
-            .get("https://hamlet.payfill.co/api/auth/admin")
-            .then(res => {
-            console.log(res.data.company);
-            this.company = res.data.company;
-            this.loader = false
-            this.$axios
-     .get( `https://hamlet.payfill.co/api/department/${res.data.company.id}`  )
-        .then(res => {
-          console.log(res.data);
-          this.loader2 = false
-          this.departments = res.data;
-
+    },
+    getCompany() {
+      this.$axios
+        .get("https://hamlet.payfill.co/api/auth/admin")
+        .then((res) => {
+          console.log(res.data.company);
+          this.company = res.data.company;
+          // this.dept = res.data.company.id
+          // console.log(this.dept)
+          this.loader = false;
+        })
+        .catch(() => {
+          console.log(error);
+          this.loader = false;
         });
-            });
-        },   
+    },
     addDepartment() {
       // this.isLoading = false;
       this.submitted = true;
@@ -244,7 +239,7 @@ export default {
         }
       });
     },
- 
+
     getDepartment() {
       this.$axios
         .get("https://hamlet.payfill.co/api/auth/admin")
@@ -310,7 +305,7 @@ export default {
               this.isLoading_1 = false;
             });
         } else {
-          this.isLoading_1 = true; 
+          this.isLoading_1 = true;
         }
       });
 
@@ -334,13 +329,10 @@ export default {
       //     console.log(error);
       //     this.loader = false;
       //   });
-    }, 
-    created() {
-        this.getCompany();
-    }
-
-}
-</script>  
+    },
+  },
+};
+</script>
 
 <style scoped>
 * {
@@ -499,13 +491,12 @@ hr {
     padding-right: 30px;
   }
   .one2 {
-    width: 75%;  
+    width: 75%;
 
     margin-top: 2rem;
   }
 }
 
- 
 @media (min-width: 769px) and (max-width: 1200px) {
   .grid {
     grid-gap: 2rem;
@@ -523,4 +514,4 @@ hr {
     margin-left: 0px;
   }
 }
-</style> 
+</style>
