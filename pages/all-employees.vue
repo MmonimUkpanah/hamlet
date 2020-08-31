@@ -8,7 +8,6 @@
         </div>
         <div class="col-sm-9 pt-2">
           <div class="float-right">
-            <!-- <div class="btn btn-secondary">Update employees</div> -->
             <nuxt-link to="/dashboard">
               <div class="btn1">Back</div>
             </nuxt-link>
@@ -22,6 +21,7 @@
                 </span>
               </div>
       <div class="card" v-else>
+        
         <div class="card-body">
           <div class="row">
             <div class="col-sm-2 pt-4 pb-4 add-border">

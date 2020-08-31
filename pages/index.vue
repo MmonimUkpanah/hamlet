@@ -45,15 +45,14 @@
             </div>
             <div class="startbutton">
               <nuxt-link to="/signup">
-                            <button class="btn2 mt-3">
-                              Get started
-                              <span class="ml-2">
-                                <font-awesome-icon :icon="['fa', 'angle-right']" />
-                              </span>
-                            </button>
-                          </nuxt-link>
+                <button class="btn2 mt-3">
+                  Get started
+                  <span class="ml-2">
+                    <font-awesome-icon :icon="['fa', 'angle-right']" />
+                  </span>
+                </button>
+              </nuxt-link>
             </div>
-            
           </div>
           <div class="col-lg-6">
             <img src="/img/logo.png" alt class="img-fluid" />
@@ -113,9 +112,9 @@
               <div class="letter-under">Signup</div>
               <div class="letter-under-1">
                 Explore from hundreds of NG and US stocks.
-                <br />we’ve made it fast and seamless
+                we’ve made it fast and seamless
                 to discover the
-                <br />best local and global companies to invest in
+                best local and global companies to invest in.
               </div>
             </div>
             <div class="col-sm-6">
@@ -124,10 +123,10 @@
               <div class="letter-under-1">
                 Business productivity is of paramount
                 importance
-                <br />to the employers
+                to the employers
                 and poor performance
                 of an
-                <br />employee can badly affect the overall efficiency.
+                employee can badly affect the overall efficiency.
               </div>
             </div>
           </div>
@@ -260,13 +259,14 @@ export default {
 }
 .system-bg {
   background-image: url("/img/bg1.png"), url("/img/bg2.png");
-  background-repeat: no-repeat;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 30% 30%;
   background-position: top left, bottom right;
 }
 .border-blue {
   border: 2px solid #0065fc;
   width: 25%;
-  margin-top: 13rem;
+  margin-top: 11rem;
 }
 .border-text {
   font-style: normal;
@@ -284,10 +284,11 @@ export default {
   color: #002b6b;
 }
 .system-bg-1 {
-  background-image: url("/img/bg3.png");
+  /* background-image: url("/img/bg2.png"); */
   background-repeat: no-repeat;
+  background-size: 50% 50%;
   /* background-size: contain; */
-  background-position: bottom right;
+  background-position: top right;
 }
 .how-it-works {
   font-style: normal;
@@ -310,6 +311,7 @@ export default {
   font-weight: normal;
   font-size: 24px;
   line-height: 42px;
+  width: 90%;
   /* letter-spacing: 0.03em; */
   color: #dae9ff;
   margin-top: 0.5rem;
@@ -340,24 +342,23 @@ export default {
     margin-bottom: 26px;
   }
   .welcome-text {
-  font-size: 48px;
-  line-height: 59px;
-  text-align: center;
-  margin-top: 2rem;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.welcome-p {
-  font-size: 24px;
-  text-align: center;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.startbutton{
-  text-align: center;
-  margin-bottom: 2rem !important;
-}
-
+    font-size: 48px;
+    line-height: 59px;
+    text-align: center;
+    margin-top: 2rem;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .welcome-p {
+    font-size: 24px;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .startbutton {
+    text-align: center;
+    margin-bottom: 2rem !important;
+  }
 }
 
 @media (min-width: 568px) and (max-width: 768px) {
