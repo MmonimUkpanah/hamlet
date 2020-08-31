@@ -49,6 +49,7 @@
             </div>
         
            <div class="one1">
+             <img :src="this.company.company_logo" alt class="w-99" style="margin-bottom:1rem" />
             <p><nuxt-link to="/department/add-department" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Add Department</h5> </nuxt-link></p>
             
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -56,6 +57,18 @@
       {{auth.user.email}}
       <span class="ml-3">Log out</span>
     </li> -->
+    <li class="nav-item active">
+      
+        <img
+                      :src="this.profile_pic.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="50px"
+                      height="50px"
+                      style=" margin-bottom:1rem"
+                      
+           />
+      </li>
       <li class="nav-item active">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
          <span v-else><app-loader /></span>
@@ -91,11 +104,13 @@ export default {
       profile_pic : {},
      styleObject : {
        width : '0px'
-     },loader : true
+     },loader : true,
+     company: {},
     }
   },
  mounted(){
-      this.getProfile()
+      this.getProfile(),
+      this.getCompany()
   },
   methods : {
     getProfile(){
@@ -123,6 +138,14 @@ export default {
           type: 'success'
         })
     },
+    getCompany() {
+        this.$axios
+            .get("https://hamlet.payfill.co/api/auth/admin")
+            .then(res => {
+            console.log(res.data.company);
+            this.company = res.data.company;
+            });
+        }
   }
 }
 </script>>
@@ -261,6 +284,9 @@ position: absolute;
   .mobileView{
     display: block;
   }
+  .one1{
+    text-align: center !important;
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 578px) {
@@ -277,6 +303,9 @@ position: absolute;
  font-size: 2rem !important; 
  margin-left: 55px;
 }
+.one1{
+    text-align: center !important;
+  }
 }
 @media only screen and (min-width: 710px) and (max-width: 768px){
     .one{

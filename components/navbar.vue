@@ -49,7 +49,7 @@
             </div>
         
            <div class="one1">
-            <img src="~/assets/Group 58.png" alt="">
+            <img :src="this.company.company_logo" alt class="w-99" />
             
             <h5 style="color:white; margin-top:2rem">HIRING CHECKLIST</h5>
             <p><nuxt-link to="/contactinfo" style="text-decoration:none; color : #FFFFFF;">Employee Details</nuxt-link></p>
@@ -68,7 +68,7 @@
                       class="rounded-circle"
                       width="50px"
                       height="50px"
-                      style="margin-left:.5rem"
+                    
            />
       </li>
       <li class="nav-item active mt-1">
@@ -110,11 +110,13 @@ export default {
      styleObject : {
        width : '0px'
      },
-     loader : true
+     loader : true,
+     company: {},
     }
   },
   mounted(){
-    this.getProfile()
+    this.getProfile(),
+    this.getCompany()
   },
   methods : {
     getProfile(){
@@ -142,6 +144,14 @@ export default {
           type: 'success'
         })
     },
+    getCompany() {
+        this.$axios
+            .get("https://hamlet.payfill.co/api/auth/admin")
+            .then(res => {
+            console.log(res.data.company);
+            this.company = res.data.company;
+            });
+        }
   }
 }
 </script>>
@@ -280,6 +290,9 @@ position: absolute;
   .mobileView{
     display: block;
   }
+  .one1{
+    text-align: center !important;
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 578px) {
@@ -293,6 +306,9 @@ position: absolute;
  top: 1rem;
  right: 2rem;
 }
+.one1{
+    text-align: center !important;
+  }
 }
 @media only screen and (min-width: 710px) and (max-width: 768px){
     .one{

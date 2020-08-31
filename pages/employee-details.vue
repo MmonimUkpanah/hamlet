@@ -187,7 +187,7 @@
                 <nuxt-link to="/dashboard">
                   <button class="btn1">Back</button>
                 </nuxt-link>
-                <button type="submit" class="btn2 form-control">
+                <button type="submit" class="btn2">
                   <span v-if="isLoading">Next</span>
                   <div v-else>
                     <app-loader />

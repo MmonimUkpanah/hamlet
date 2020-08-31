@@ -104,6 +104,7 @@ export default {
       this.styleObject.width = "0px";
       // console.log('clicked')
     },
+    
   },
 };
 </script>
