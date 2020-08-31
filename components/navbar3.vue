@@ -14,14 +14,17 @@
       <span class="ml-3">Log out</span>
     </li> -->
     <li class="nav-item active">
-        <img
-            :src="this.profile_pic.profile_pic"
-            alt
-            class="rounded-circle"
-            width="40px"
-            height="40px"
-           />
+        <li class="nav-item active">
+        <nuxt-link to="/profile/profile"><img
+                      :src="this.profile_pic.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="40px"
+                      height="40px"
+                      
+           /></nuxt-link>
       </li>
+
       <li class="nav-item active mt-1">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
          <span v-else><app-loader /></span>
@@ -48,7 +51,7 @@
         
            <div class="one1">
             
-            <img :src="this.company.company_logo" alt class="w-99" style="margin-bottom:1rem" />
+            <img :src="this.company.company_logo" alt class="w-50" style="margin-bottom:1rem" />
             <p><nuxt-link to="/company/company-overview" style="text-decoration:none; color : #FFFFFF; margin-top:2rem !important"><h5 style="margin-bottom:1rem">Company Overview</h5> </nuxt-link></p>
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
               <!-- <li v-if="$auth.loggedIn">
@@ -57,15 +60,14 @@
             </li> -->
             <li class="nav-item active">
       
-        <img
+        <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
                       width="50px"
                       height="50px"
-                      style=" margin-bottom:1rem"
-                      
-           />
+                    
+           /></nuxt-link>
       </li>
               <li class="nav-item active">
                 <button v-if="loader" @click="logOut" class="btn1">Log Out</button>

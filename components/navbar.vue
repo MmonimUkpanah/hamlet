@@ -15,14 +15,14 @@
       <span class="ml-3">Log out</span>
     </li> -->
      <li class="nav-item active">
-        <img
+        <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
                       width="40px"
                       height="40px"
                       
-           />
+           /></nuxt-link>
       </li>
       <li class="nav-item active">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
@@ -49,7 +49,7 @@
             </div>
         
            <div class="one1">
-            <img :src="this.company.company_logo" alt class="w-99" />
+            <img :src="this.company.company_logo" alt class="w-50" />
             
             <h5 style="color:white; margin-top:2rem">HIRING CHECKLIST</h5>
             <p><nuxt-link to="/contactinfo" style="text-decoration:none; color : #FFFFFF;">Employee Details</nuxt-link></p>
@@ -62,14 +62,14 @@
     </li> -->
      <li class="nav-item active">
       
-        <img
+        <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
                       width="50px"
                       height="50px"
                     
-           />
+           /></nuxt-link>
       </li>
       <li class="nav-item active mt-1">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
