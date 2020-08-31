@@ -96,7 +96,7 @@
                       name="state"
                       class="form-control"
                       id
-                      
+
                       placeholder="state"
                       v-model="companyInfo.state"
                       v-validate="'required'"
@@ -113,7 +113,7 @@
                       name="email"
                       class="form-control"
                       id
-                
+
                       placeholder="company email"
                       v-model="companyInfo.company_email"
                       v-validate="'required|email'"
@@ -503,7 +503,7 @@ export default {
       formData.append("company_logo", this.companyInfo.profile_pic);
       formData.append("company_phone", this.companyInfo.company_phone);
       axios
-        .post("https://hamlet-hrm.herokuapp.com/api/company", formData, {
+        .post("http://localhost:9000/api/company", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.user}`,
@@ -612,14 +612,14 @@ input{
     background-color: rgba(255,255,255,1) !important;
 }
 .file-border{
-    padding: 1rem 5rem 1rem 1rem; 
-    border: 1px solid rgb(192, 192, 192);  
-    outline: none; 
+    padding: 1rem 5rem 1rem 1rem;
+    border: 1px solid rgb(192, 192, 192);
+    outline: none;
 }
 textarea{
     width: 70%;
     height: 10vh;
-    border: 1px solid rgb(192, 192, 192);  
+    border: 1px solid rgb(192, 192, 192);
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
     background-color: rgba(255,255,255,1) !important;
 }
@@ -895,4 +895,4 @@ p {
     margin-left: 1rem;
   }
 }
-</style> 
+</style>

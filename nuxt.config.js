@@ -133,7 +133,8 @@ export default {
     ]
   ],
   axios: {
-    baseURL: "https://hamlet-hrm.herokuapp.com/api"
+    // baseURL: "https://hamlet-hrm.herokuapp.com/api" //for testing
+    baseURL: "http://localhost:9000/api" //for dev
     // requestInterceptor: (config, { store }) => {
     //    config.headers.common['Authorization'] = `Bearer ${store.getters['auth/token']}`;
     // }

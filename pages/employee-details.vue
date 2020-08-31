@@ -39,10 +39,7 @@
                 <p>City</p>
                 <input type="text" class="one6"  v-model="employeeDetails.city" required>
               </div>
-              <div class="grid">
-                <p>Age</p>
-                <input type="number" class="one6" v-model="employeeDetails.age" required >
-              </div>
+
               <div class="grid">
                 <p>Qualifications</p>
                 <select class="custom-select one6" id="inputGroupSelect04" aria-label="Example select with button addon" v-model="employeeDetails.qualification" required>
@@ -52,7 +49,7 @@
                     <option value="Masters">Masters</option>
                     <option value="Phd">Phd</option>
                   </select>
-                
+
               </div>
               <div class="grid">
                 <p>Profile Picture</p>
@@ -94,6 +91,7 @@
     ,
     data(){
       return{
+        id:'',
         employeeDetails:{
           first_name: "",
           other_names: "",
@@ -101,7 +99,6 @@
           dob: "",
           address: "",
           city: "",
-          age: "",
           qualification: "",
           profile_pic: {},
         },
@@ -123,19 +120,17 @@
         formData.append('dob', this.employeeDetails.dob)
         formData.append('address', this.employeeDetails.address)
         formData.append('city', this.employeeDetails.city)
-        formData.append('age', this.employeeDetails.age)
         formData.append('qualification', this.employeeDetails.qualification)
         formData.append('profile_pic', this.employeeDetails.profile_pic)
-        this.$axios.post("https://hamlet-hrm.herokuapp.com/api/employee", formData).then((res)=>{
-          console.log(res.data);
+        this.$axios.post("http://localhost:9000/api/employee", formData).then((res)=>{
           swal({
             title: "Success",
             text: "You have added your employee's details successfully",
             icon: "success",
             button: false
           });
-          this.$router.push("/contact-info");
-          this.isLoading = false;
+          this.isLoading = false; 
+          this.$router.push(`/contact-info/${res.data[0].id}`);
         }).catch(e => {
           this.isLoading = false;
         });

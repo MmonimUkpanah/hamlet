@@ -67,7 +67,6 @@
               <table
                 class="table table-responsive table-bordered table-hover border-0"
               >
-
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Full Name</th>
@@ -92,7 +91,7 @@
                    <td>  <span v-if="employee.job_details">{{ (employee.job_details) ? employee.job_details.work_location : '...' }}</span></td>
                     <td>  <span v-if="employee.job_details">{{ (employee.job_details) ? employee.job_details.date_hired : '...'}}</span></td>
                     <td>
-                        <nuxt-link :to="`/employee/personal-info/${employee.id}`" :title="`View ${employee.first_name} ${employee.other_names}`" class="btn text-primary fa fa-eye"></nuxt-link>
+                        <nuxt-link :to="`/employee/${employee.id}`" :title="`View ${employee.first_name} ${employee.other_names}`" class="btn text-primary fa fa-eye"></nuxt-link>
 
 
                       </td>
@@ -151,10 +150,9 @@ export default {
     },
     getEmployees() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+        .get(`http://localhost:9000/api/employee/${this.user}`)
         .then(res => {
-          console.log(res.data.employees);
-          this.employees = res.data.employees;
+          this.employees = res.data;
           this.loader = false
         });
     },
@@ -162,7 +160,9 @@ export default {
       this.$router.push("/single-employee/personal-info")
     }
   },
-  created() {
+  mounted(){
+    this.user = this.$auth.$storage.getLocalStorage("user").id;
+    console.log(this.user)
     this.getEmployees()
   }
 };

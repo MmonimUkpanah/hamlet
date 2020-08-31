@@ -3,7 +3,7 @@
         <app-navbar/>
         <div class="row one5">
             <app-sidebar/>
-            
+
             <div  class="one2 ">
                 <div>
                     <div class="one6" >
@@ -31,11 +31,11 @@
                     <p> Department Name</p>
                     <input type="text" v-model="departmentInfo.name">
                     </div>
-                    
-                
-                    
-                    <hr>             
-                
+
+
+
+                    <hr>
+
                     <span class="one9">
                     <button type="submit" class="btn1"><span v-if="isLoading">Add</span>
                 <div v-else>
@@ -43,23 +43,23 @@
                 </div>
               </button><button type="button" class="btn1" @click="showDepartment">View</button>
                     </span>
-                
+
                     </div>
                     </div>
                     </form>
                     </div>
-                    
+
                     <div class="one3" v-else>
                     <h3>Departments</h3>
                     <div >
                     <div class="table-responsive">
                             <table class="table ">
-                                
+
                                 <thead>
                                     <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    
+
                                     </tr>
                                     <div v-if="loader2" class="text-center">
                                     <span disabled>
@@ -74,31 +74,31 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            
+
                     </div>
                     <button type="button" class="btn1" @click="hideDepartment">Back</button>
                     </div>
-                    
-                
-                    
-                              
-                
-                    
+
+
+
+
+
+
                     </div>
-                    
-                         
+
+
                     </div>
-                   
+
                 </div>
-                
-                
-                
-        
+
+
+
+
         </div>
-        
-        
+
+
     </div>
-    
+
 
 </template>
 
@@ -130,30 +130,29 @@ export default {
     methods: {
         getCompany() {
         this.$axios
-            .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+            .get("http://localhost:9000/api/auth/admin")
             .then(res => {
             console.log(res.data.company);
             this.company = res.data.company;
             this.loader = false
-            });
-        },
-    addDepartment(){
-        this.isLoading = false;
-        this.$axios.post("https://hamlet-hrm.herokuapp.com/api/department", this.departmentInfo).then((res)=>{
-            console.log(res.data);this.isLoading = true;
-        })
-    },
-        
-        getDepartment() {
-      this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/departments")
+            this.$axios
+     .get( `http://localhost:9000/api/department/${res.data.company.id}`  )
         .then(res => {
           console.log(res.data);
           this.loader2 = false
           this.departments = res.data;
 
         });
+            });
+        },
+    addDepartment(){
+        this.isLoading = false;
+        this.$axios.post("http://localhost:9000/api/department", this.departmentInfo).then((res)=>{
+            console.log(res.data);this.isLoading = true;
+        })
     },
+
+
         showDepartment(){
             this.show = false;
         },
@@ -163,9 +162,8 @@ export default {
     },
     created() {
         this.getCompany();
-        this.getDepartment()
     }
-    
+
 }
 </script>
 
@@ -174,7 +172,7 @@ export default {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        
+
     }
     .form-row{
         margin-bottom: 2rem !important;
@@ -245,7 +243,7 @@ export default {
         padding-left: 4rem;
         padding-right: 4rem;
         padding-top: 2rem;
-        
+
     }
     .one8{
         text-align: right;
@@ -271,15 +269,15 @@ export default {
         border-radius: 5px;
         padding: 5px 20px;
         border: 1px solid #0065FC;
-        
+
     }
-    
+
 
     @media (max-width: 567px) {
         .one2{
         width: 100%;
         margin-left: 0px;
-       
+
     }
         .grid{
         display: grid;
@@ -300,7 +298,7 @@ export default {
             width: 100%;
     }
         .btn2{
-        
+
         margin-left: 0px;
     }
         .btn1{
@@ -310,11 +308,11 @@ export default {
         padding-left: 30px;
         padding-right: 30px;
     }
-        
+
     }
 
     @media(min-width: 568px) and (max-width:768px) {
-     
+
         .one3{
         padding-left: 30px;
         padding-right: 30px;
@@ -325,9 +323,9 @@ export default {
     }
     .one2{
         width: 75%;
-        
+
         margin-top: 2rem;
-        
+
     }
     }
 
@@ -349,5 +347,5 @@ export default {
         margin-left: 0px;
     }
      }
-    
+
 </style>

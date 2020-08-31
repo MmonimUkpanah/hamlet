@@ -24,7 +24,7 @@
 
               <hr>
               <div class="one4">
-                <nuxt-link to="/employee-details" class="btn1">Back</nuxt-link>
+                <nuxt-link to="/employee-details" class="btn1 mb-1 ">Back</nuxt-link>
                 <button type="submit"  class="btn2">
                   <span v-if="!isLoading">Next</span>
                   <app-loader v-else />
@@ -57,7 +57,7 @@
           phone: "",
           email: "",
           emergency_contact: "",
-          employee_id: "",
+          employee_id: this.$route.params.name,
         },
         isLoading : false
       }
@@ -78,9 +78,9 @@
         // if (!this.dataIsValid) {
         //   return;
         // }
-          
+
         this.isLoading = true
-        this.$axios.post("https://hamlet-hrm.herokuapp.com/api/contactinfo", this.contactInfo).then((res) => {
+        this.$axios.post("http://localhost:9000/api/contact-info", this.contactInfo).then((res) => {
           console.log(res.data);
           swal({
             title: "Success",
@@ -89,11 +89,11 @@
             button: false
           });
           this.isLoading = false;
-          this.$router.push("/job-details");
+          this.$router.push(`/job-details/${this.$route.params.name}`);
         }).catch(e => {
           this.isLoading = false;
         })
-      
+
       },
     }
 

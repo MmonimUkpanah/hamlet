@@ -12,7 +12,7 @@
               <p>Job Title</p>
               <input type="text" class="one6"  v-model="jobDetails.job_title" required>
             </div>
-            
+
             <div class="grid">
               <p>Employment Type</p>
               <div class="one7">
@@ -70,12 +70,9 @@
             </div>
             <div class="grid">
               <p>Salary (In Naira)</p>
-              <input  class="one6" type="number" v-model="jobDetails.salary">
+              <input  class="one6" type="text"  v-model="jobDetails.salary">
             </div>
-            <div class="grid">
-              <p>Description</p>
-              <input type="text" class="one6" v-model="jobDetails.description">
-            </div>
+
             <div class="grid">
               <p>Job Category</p>
               <input type="text" class="one6" v-model="jobDetails.job_category">
@@ -88,6 +85,14 @@
                 </select>
               </div>
             </div>
+            <div class="grid" >
+              <p>Description</p>
+              <div class="input-group">
+                 <textarea id="my-textarea"  class="form-control one6" cols="30" rows="10" v-model="jobDetails.description"></textarea>
+
+              </div>
+            </div>
+
 
             <hr>
             <div class="one4">
@@ -129,13 +134,15 @@
         jobDetails:{
           employment_type:"",
           job_title: "",
-          salary: "",
+          salary: "₦",
           date_hired: "",
           description: "",
           department: "",
           job_category: "",
           work_location: "",
-          employment_classification: ""
+          employment_classification: "",
+          employee_id: this.$route.params.name,
+
         },
         isLoading : false,
         departments:{},
@@ -152,7 +159,7 @@
       },
       addJobDetails(){
         this.isLoading = true;
-        this.$axios.post("https://hamlet-hrm.herokuapp.com/api/jobdetails", this.jobDetails).then((res)=>{
+        this.$axios.post("http://localhost:9000/api/job-details", this.jobDetails).then((res)=>{
           console.log(res.data);
           swal({
             title: "Success",
@@ -168,10 +175,11 @@
       },
       getDepartment() {
       this.$axios
-        .get("https://hamlet-hrm.herokuapp.com/api/departments")
+        .get(`http://localhost:9000/api/department/${this.$route.params.name}`)
         .then(res => {
           console.log(res.data);
-          this.departments = res.data;this.show = true;
+          this.departments = res.data;
+          this.show = true;
         });
     },
     },
@@ -183,6 +191,7 @@
 </script>
 
 <style scoped>
+
   *{
     box-sizing: border-box;
     margin: 0;

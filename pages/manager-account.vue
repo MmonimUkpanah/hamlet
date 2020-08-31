@@ -8,7 +8,7 @@
                 <div class="form-edit mt-5">
                     <form @submit.prevent="addManger">
                             <div class="first-form">
-                                <h1>Manager Information</h1>
+                                <h1>Manager's Information</h1>
                                 <div class="mt-4">
                                      <input type="text" name="firstName" class="form-control" id="" placeholder="First Name" v-model="managerInfo.first_name" v-validate="'required'"
                                      :class="{ 'is-invalid': submitted && errors.has('firstName') }">
@@ -17,7 +17,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("firstName")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                 <div class="mt-4">
                                      <input type="text" name="lastName" class="form-control" id="" placeholder="Last Name" v-model="managerInfo.last_name" v-validate="'required'"
@@ -27,7 +27,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("lastName")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                 <div class="mt-4">
                                      <input type="text" name="address" class="form-control" id=""  placeholder="Address" v-model="managerInfo.address" v-validate="'required'"
@@ -37,7 +37,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("address")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                  <div class="mt-4">
                                      <label for="">Upload Profile Picture</label> <br>
@@ -49,10 +49,10 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("profile-picture")}}
-                                    </small>  
+                                    </small>
                                 </div>
                             </div>
-                        
+
                             <button type="submit" class="btn1">
                                  <span v-if="loader">Submit</span>
                                 <div v-else>
@@ -98,16 +98,16 @@
                             </div>
                         </div> -->
                     </div>
-                   
+
                 </div>
-            
+
 
             </div>
-           
+
                 </div>
 
                 <!-- Mobile View -->
-                <div class="container wrapper mobileShow"> 
+                <div class="container wrapper mobileShow">
                     <div class="mobile-form">
                         <form @submit.prevent="addManger">
                              <div class="first-form">
@@ -120,7 +120,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("firstName")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                 <div class="mt-4">
                                      <input type="text" name="lastName" class="form-control" id="" required placeholder="Last Name" v-model="managerInfo.last_name" v-validate="'required'"
@@ -130,7 +130,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("lastName")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                 <div class="mt-4">
                                      <input type="text" name="address" class="form-control" id=""  placeholder="Address" v-model="managerInfo.address" v-validate="'required'"
@@ -140,7 +140,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("address")}}
-                                    </small>  
+                                    </small>
                                 </div>
                                  <div class="mt-4">
                                      <label for="">Upload Profile Picture</label> <br>
@@ -151,7 +151,7 @@
                                         class="invalid-feedback"
                                     >
                                     {{ errors.first("profile picture")}}
-                                    </small>  
+                                    </small>
                                 </div>
                             </div>
                              <button type="submit" class="btn1">Submit</button>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
                 <!-- Mobile View End -->
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -172,7 +172,7 @@ export default {
   components : {
         Navbar,
          "app-loader": newLoader,
-    },  
+    },
     data(){
         return{
             managerInfo : {
@@ -214,7 +214,7 @@ export default {
             formData.append('last_name', this.managerInfo.last_name)
             formData.append('address', this.managerInfo.address)
             formData.append('profile_pic', this.managerInfo.profile_pic)
-             axios.post('https://hamlet-hrm.herokuapp.com/api/profile', formData, {headers : {'Authorization' : `Bearer ${this.user}`}}).then((res)=> {
+             axios.post('http://localhost:9000/api/profile', formData, {headers : {'Authorization' : `Bearer ${this.user}`}}).then((res)=> {
                 this.$message({
                 message: "Manager Successfully Added!",
                 type: 'success'
@@ -228,7 +228,7 @@ export default {
                 this.loader = true
             })
         },
-        
+
         // addManger(){
         //     const formData = new FormData()
         //     formData.append('first_name', this.managerInfo.first_name)
@@ -284,14 +284,14 @@ input{
     background-color: rgba(255,255,255,1) !important;
 }
 .file-border{
-    padding: 1rem 5rem 1rem 1rem; 
-    border: 1px solid rgb(192, 192, 192);  
-    outline: none; 
+    padding: 1rem 5rem 1rem 1rem;
+    border: 1px solid rgb(192, 192, 192);
+    outline: none;
 }
 textarea{
     width: 70%;
     height: 10vh;
-    border: 1px solid rgb(192, 192, 192);  
+    border: 1px solid rgb(192, 192, 192);
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
     background-color: rgba(255,255,255,1) !important;
 }
@@ -416,7 +416,7 @@ h1{
     }
     input[type=button]span{
         color: #FFFFFF !important;
-    } 
+    }
     .btn1{
     padding: 1rem 8.7rem !important;
     margin-top: 2rem;
