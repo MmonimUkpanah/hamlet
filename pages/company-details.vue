@@ -9,20 +9,20 @@
             <div class="stepwizard">
               <div class="stepwizard-row" ref="edu">
                 <div class="stepwizard-step col-lg-4">
-                  <a href type="button" class="btn btn-success btn-circle">1</a>
+                  <a href type="button" class="btn btn-primary btn-circle">1</a>
                   <p>
                     <small>Company's Details</small>
                   </p>
                 </div>
                 <div class="stepwizard-step col-lg-4">
-                  <a href type="button" class="btn btn-success btn-circle">2</a>
+                  <a href type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                   <p>
                     <small>Company's Details cont.</small>
                   </p>
                 </div>
               </div>
             </div>
-            <form action>
+            <form @submit.prevent="submitBtn">
               <div class="form-all" ref="formShow">
                 <div class="second-form active" id="hide-form">
                   <!-- <h1>Company's Information</h1> -->
@@ -94,9 +94,7 @@
                     <input
                       type="text"
                       name="state"
-                      class="form-control"
-                      id
-
+                      class="form-control" 
                       placeholder="state"
                       v-model="companyInfo.state"
                       v-validate="'required'"
@@ -111,9 +109,7 @@
                     <input
                       type="email"
                       name="email"
-                      class="form-control"
-                      id
-
+                      class="form-control" 
                       placeholder="company email"
                       v-model="companyInfo.company_email"
                       v-validate="'required|email'"
@@ -160,7 +156,7 @@
                   </div>
                   <div class="mt-4">
                     <input
-                      type = ""
+                      type
                       name="no-of-employees"
                       class="form-control"
                       id
@@ -215,6 +211,17 @@
                   </div>
                 </div>
               </div>
+              <button
+                type="submit"
+                class="btn3 btn btn-primary mt-3"
+                v-if="showS"
+                style="outline: none !important"
+              >
+                <span v-if="loader">Submit</span>
+                <div v-else>
+                  <app-loader />
+                </div>
+              </button>
             </form>
             <div class="mt-5">
               <button
@@ -233,7 +240,7 @@
               >
                 <font-awesome-icon :icon="['fa', 'arrow-right']" />
               </button>
-              <button
+              <!-- <button
                 type="submit"
                 class="btn3 btn btn-success"
                 @click="submitBtn"
@@ -244,7 +251,7 @@
                 <div v-else>
                   <app-loader />
                 </div>
-              </button>
+              </button>-->
             </div>
           </div>
         </div>
@@ -274,7 +281,7 @@
               </div>
               <div class="text-box">Best Pricing Plans</div>
             </div>
-          </div> -->
+          </div>-->
         </div>
       </div>
     </div>
@@ -439,35 +446,40 @@ export default {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           console.log("Login");
-        //    this.showS = true
+          //    this.showS = true
         } else {
-        // this.showS = false
+          // this.showS = false
         }
       });
-       if(this.companyInfo.company_name === '' || this.companyInfo.company_address === '' || this.companyInfo.company_email ==='' || this.companyInfo.city === '' ||
-           this.companyInfo.state === '' || this.companyInfo.zip_code === '') {
-          swal({
-                  title: "Oops!",
-                  text: "feilds cannot be empty!",
-                  icon: "error",
-                  button: false,
-                  timer : 1000
-                  });
-
-          }
+      if (
+        this.companyInfo.company_name === "" ||
+        this.companyInfo.company_address === "" ||
+        this.companyInfo.company_email === "" ||
+        this.companyInfo.city === "" ||
+        this.companyInfo.state === "" ||
+        this.companyInfo.zip_code === ""
+      ) {
+        swal({
+          title: "Oops!",
+          text: "fields cannot be empty!",
+          icon: "error",
+          button: false,
+          timer: 1000,
+        });
+      }
       this.prevDisabled = false;
       this.$refs.formShow.children[this.counter].classList.remove("active");
       this.counter++;
       this.$refs.formShow.children[this.counter].classList.add("active");
       if (this.counter + 1 === this.$refs.formShow.children.length) {
         this.isDisabled = true;
-        this.showS = true
+        this.showS = true;
       }
       for (let i = 0; i <= this.$refs.edu.children.length; i++) {
         if ((this.$refs.edu[i] = this.$refs.formShow.children)) {
           this.$refs.edu.children[
             this.counter
-          ].childNodes[0].style.backgroundColor = "#28a745";
+          ].childNodes[0].style.backgroundColor = "#0065fc";
         }
       }
     },
@@ -489,7 +501,28 @@ export default {
       }
     },
     submitBtn() {
-      this.loader = false;
+      if (
+        this.companyInfo.company_name === "" ||
+        this.companyInfo.company_address === "" ||
+        this.companyInfo.company_email === "" ||
+        this.companyInfo.company_website === "" ||
+        this.companyInfo.no_of_employees === "" ||
+        this.companyInfo.city === "" ||
+        this.companyInfo.state === "" ||
+        this.companyInfo.zip_code === "" ||
+        this.companyInfo.services === "" ||
+        this.companyInfo.company_phone === "" ||
+        this.companyInfo.profile_pic === ""
+      ) {
+        this.loader = true;
+        this.$message({
+          message: "fields cannot be empty!",
+          type: "error",
+        });
+      } else {
+        this.loader = false;
+      }
+
       const formData = new FormData();
       formData.append("company_name", this.companyInfo.company_name);
       formData.append("company_address", this.companyInfo.company_address);
@@ -502,8 +535,8 @@ export default {
       formData.append("services", this.companyInfo.services);
       formData.append("company_logo", this.companyInfo.profile_pic);
       formData.append("company_phone", this.companyInfo.company_phone);
-      axios
-        .post("http://localhost:9000/api/company", formData, {
+      axios 
+        .post("https://hamlet.payfill.co/api/company", formData, { 
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.user}`,
@@ -511,9 +544,10 @@ export default {
         })
         .then((res) => {
           this.$message({
-          message: "Company Details added successfully, Registration Completed!",
-          type: 'success'
-        })
+            message:
+              "Company Details added successfully, Registration Completed!",
+            type: "success",
+          });
           this.$router.push("/dashboard");
           this.loader = false;
           console.log(res.data);
@@ -521,29 +555,29 @@ export default {
         .catch((error) => {
           console.log(error);
           this.loader = true;
-          if (
-            this.companyInfo.company_name === "" ||
-            this.companyInfo.company_address === "" ||
-            this.companyInfo.company_email === "" ||
-            this.companyInfo.company_website === "" ||
-            this.companyInfo.no_of_employees === "" ||
-            this.companyInfo.city === "" ||
-            this.companyInfo.state === "" ||
-            this.companyInfo.zip_code === "" ||
-            this.companyInfo.services === "" ||
-            this.companyInfo.company_phone === "" ||
-            this.companyInfo.profile_pic === ""
-          ) {
-            this.$message({
-            message: "fields cannot be empty!",
-            type: 'error'
-        })
-          } else {
-            this.$message({
-            message: "Unauthorized User, Please Register!",
-            type: 'error'
-        })
-          }
+          // if (
+          //   this.companyInfo.company_name === "" ||
+          //   this.companyInfo.company_address === "" ||
+          //   this.companyInfo.company_email === "" ||
+          //   this.companyInfo.company_website === "" ||
+          //   this.companyInfo.no_of_employees === "" ||
+          //   this.companyInfo.city === "" ||
+          //   this.companyInfo.state === "" ||
+          //   this.companyInfo.zip_code === "" ||
+          //   this.companyInfo.services === "" ||
+          //   this.companyInfo.company_phone === "" ||
+          //   this.companyInfo.profile_pic === ""
+          // ) {
+          //   this.$message({
+          //     message: "fields cannot be empty!",
+          //     type: "error",
+          //   });
+          // } else {
+          //   this.$message({
+          //     message: "Unauthorized User, Please Register!",
+          //     type: "error",
+          //   });
+          // }
         });
       console.log(this.companyInfo);
     },
@@ -575,61 +609,66 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
-    background: linear-gradient(to right, rgba(8, 29, 41, 0.7),
-       rgba(8, 29, 41, 0.7)), url("/img/nesa.jpg") no-repeat center center/cover;
-    /* background-position: right; */
-    /* background-size: center center/cover; */
-    /* background-repeat: no-repeat; */
-    height: 100vh;
-    margin-top: 1.5px !important;
+ 
+.wrapper {
+  background: linear-gradient(
+      to right,
+      rgba(8, 29, 41, 0.7),
+      rgba(8, 29, 41, 0.7)
+    ),
+    url("/img/nesa.jpg") no-repeat center center/cover;
+  /* background-position: right; */
+  /* background-size: center center/cover; */
+  /* background-repeat: no-repeat; */
+  height: auto;
+  margin-top: 1.5px !important;
 }
-.bg-big{
-    /* background-color:#F9F9F9; */
-    background-color: rgb(192, 192, 192, 0.1);
-    margin-top: 4.0rem;
+.bg-big {
+  /* background-color:#F9F9F9; */
+  background-color: rgb(192, 192, 192, 0.1);
+  margin-top: 4rem;
 }
-.margin-form{
-    margin-left: 8rem;
-    /* margin-top: 1rem; */
+.margin-form {
+  margin-left: 8rem;
+  /* margin-top: 1rem; */
 }
-.grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.form-edit{
-    padding: 1rem;
+.form-edit {
+  padding: 1rem;
 }
-.first-form{
-    margin-top: 1rem;
+.first-form {
+  margin-top: 1rem;
 }
-.second-form{
-    margin-top: 1rem;
+.second-form {
+  margin-top: 1rem;
 }
-input{
-    width : 70%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-    background-color: rgba(255,255,255,1) !important;
+input {
+  width: 70%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
 }
-.file-border{
-    padding: 1rem 5rem 1rem 1rem;
-    border: 1px solid rgb(192, 192, 192);
-    outline: none;
+.file-border {
+  padding: 1rem 5rem 1rem 1rem;
+  border: 1px solid rgb(192, 192, 192);
+  outline: none;
 }
-textarea{
-    width: 70%;
-    height: 10vh;
-    border: 1px solid rgb(192, 192, 192);
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-    background-color: rgba(255,255,255,1) !important;
+textarea {
+  width: 70%;
+  height: 10vh;
+  border: 1px solid rgb(192, 192, 192);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
 }
-.btn1{
-    /* padding: .5rem 1.5rem; */
-    color: #0065FC;
-    background-color: #FFFFFF;
-    border: 1px solid #0065FC;
-    outline: none !important;
-    border-radius: 50%;
+.btn1 {
+  /* padding: .5rem 1.5rem; */
+  color: #0065fc;
+  background-color: #ffffff;
+  border: 1px solid #0065fc;
+  outline: none !important;
+  border-radius: 50%;  
 }
 .file-border {
   padding: 1rem 5rem 1rem 1rem;
@@ -665,7 +704,7 @@ textarea {
   color: #ffffff;
   /* background-color: #1DD200; */
   border: 1px solid #ffffff;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   outline: none !important;
 }
 .active {
@@ -705,6 +744,9 @@ p {
   font-weight: 600;
   font-style: italic;
 }
+/* .stepwizard-step div:first-child {
+  content: none;
+} */
 .stepwizard-step {
   text-align: center;
 }
@@ -889,6 +931,9 @@ p {
     z-index: 0;
   }
   input {
+    width: 100%;
+  }
+  textarea {
     width: 100%;
   }
   .margin-form {

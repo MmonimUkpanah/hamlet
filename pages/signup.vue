@@ -152,27 +152,29 @@ export default {
                 password_confirmation: ''
             },
             loader : false,
-            submitted : false
+            submitted : false,
         }
     },
     methods : {
         async createAccount(){
             if(this.signUp.username === "" || this.signUp.email === "" || this.signUp.password === "" || this.signUp.password_confirmation === ""){
                 this.loader = false
+                 this.$message({
+                    message: "Fields cannot be empty!",
+                    type: 'error'
+                    })
             }
             else{
             this.loader = true
             }
 
             this.submitted = true;
-            this.$validator.validateAll().then(valid => {
+            this.$validator.validateAll().then( async (valid) => {
                 if (valid) {
                 console.log("Login")
-                // this.login = false
-                }
-            });
-             try {
-            let response = await this.$axios.post('http://localhost:9000/api/auth/signup',this.signUp)
+                // this.login = false 
+                 try {
+            let response = await this.$axios.post('https://hamlet.payfill.co/api/auth/signup',this.signUp) 
             let token = response.data.token
             this.$auth.$storage.setLocalStorage('jwt', token);
         // localStorage.setItem("jwt", token);
@@ -196,14 +198,55 @@ export default {
       catch (e) {
         console.log(e);
         this.error = e.res;
+        
          if (e.response.status === 422) {
           this.$message({
-            message: "Sorry, Email as been taken",
+            message: "Sorry, Email has been taken",
             type: "error"
           });
         }
         this.loader = false
       }
+                
+                }
+                else{
+
+                }
+            });
+    //          try {
+    //         let response = await this.$axios.post('https://hamlet.payfill.co/api/auth/signup',this.signUp)
+    //         let token = response.data.token
+    //         this.$auth.$storage.setLocalStorage('jwt', token);
+    //     // localStorage.setItem("jwt", token);
+    //         console.log(response)
+    //     //   this.$router.push("/managerAccount");
+    //          await this.$auth.loginWith('local', {
+    //       data: {
+    //             email : this.signUp.email,
+    //             password : this.signUp.password
+    //       },
+    //     }) 
+    //      let user = response.data.user
+    //      this.$auth.$storage.setLocalStorage('user', user);
+    //       this.$message({
+    //       message: "Account created successfully!",
+    //       type: 'success'
+    //     })
+    //      this.$router.push("/manager-account");
+    //   }
+     
+    //   catch (e) {
+    //     console.log(e);
+    //     this.error = e.res;
+        
+    //     //  if (e.response.status === 422) {
+    //     //   this.$message({
+    //     //     message: "Sorry, Email has been taken",
+    //     //     type: "error"
+    //     //   });
+    //     // }
+    //     this.loader = false
+    //   }
         },
         // createAccount(){
         //     axios.post('https://hamlet-hrm.herokuapp.com/api/auth/signup',this.signUp).then(res=>

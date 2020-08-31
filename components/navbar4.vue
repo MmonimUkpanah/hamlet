@@ -2,15 +2,20 @@
 <div class="boxShadow shadow fixed-top">
    <div class="one desktopView">
         <nav class="navbar navbar-expand-lg navbar-light ">
-  <nuxt-link to="/"><a class="navbar-brand" href="#" style="color: #0065FC">Hamlet</a></nuxt-link>
+  <nuxt-link to="/dashboard"><a class="navbar-brand" href="#" style="color: #0065FC">Hamlet</a></nuxt-link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+       <!-- <li v-if="$auth.loggedIn">
+      {{auth.user.email}}
+      <span class="ml-3">Log out</span>
+    </li> -->
       <li class="nav-item active">
-        <nuxt-link to="/dashboard" class="nav-link" style="color: #0065FC" >Company Name</nuxt-link>
+        <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+         <span v-else><app-loader /></span>
       </li>
       
     </ul>
@@ -33,10 +38,19 @@
             </div>
         
            <div class="one1">
-            <img src="~/assets/Group 58.png" alt="" style="margin-bottom:2rem">
-            <p><nuxt-link to="/singleemployee/personalinfo" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Personal Info</h5> </nuxt-link></p>
-            <p><nuxt-link to="/singleemployee/employmentdetails" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Employment Info and Compensation</h5></nuxt-link></p>
-        
+            <p><nuxt-link to="/single-employee/personal-info" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Personal Info</h5> </nuxt-link></p>
+            <p><nuxt-link to="/single-employee/employmentdetails" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Employment Info and Compensation</h5></nuxt-link></p>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+       <!-- <li v-if="$auth.loggedIn">
+      {{auth.user.email}}
+      <span class="ml-3">Log out</span>
+    </li> -->
+      <li class="nav-item active">
+        <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+         <span v-else><app-loader /></span>
+      </li>
+      
+    </ul>
         </div>
          
           </div>
@@ -73,7 +87,17 @@ export default {
     closeNav(){
       this.styleObject.width = '0px'
       // console.log('clicked')
-    }
+    },
+    async logOut(){
+      this.loader = false
+     await this.$auth.logout();
+     localStorage.removeItem("jwt");
+    this.$router.push('/signin')
+     this.$message({
+          message:  "You Logged out successfully!",
+          type: 'success'
+        })
+    },
   }
 }
 </script>>

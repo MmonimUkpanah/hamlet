@@ -8,14 +8,14 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-   
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
        <!-- <li v-if="$auth.loggedIn">
       {{auth.user.email}}
       <span class="ml-3">Log out</span>
     </li> -->
      <li class="nav-item active">
-        <nuxt-link to="/profile/profile"><img
+      
+         <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
@@ -24,7 +24,7 @@
                       
            /></nuxt-link>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active mt-1">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
          <span v-else><app-loader /></span>
       </li>
@@ -49,19 +49,15 @@
             </div>
         
            <div class="one1">
-            <img :src="this.company.company_logo" alt class="w-50" />
+             <img :src="this.company.company_logo" alt class="w-50" style="margin-bottom:1rem" />
+            <p><nuxt-link to="/department/add-department" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Add Department</h5> </nuxt-link></p>
             
-            <h5 style="color:white; margin-top:2rem">HIRING CHECKLIST</h5>
-            <p><nuxt-link to="/contactinfo" style="text-decoration:none; color : #FFFFFF;">Employee Details</nuxt-link></p>
-            <p><nuxt-link to="/employmenttype" style="text-decoration:none;  color : #FFFFFF">Contact Information</nuxt-link></p>
-            <p><nuxt-link to="/jobdetails" style="text-decoration:none;  color : #FFFFFF">Job Details</nuxt-link></p>
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
        <!-- <li v-if="$auth.loggedIn">
       {{auth.user.email}}
       <span class="ml-3">Log out</span>
     </li> -->
-     <li class="nav-item active">
-      
+    <li class="nav-item active">
         <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
@@ -71,7 +67,7 @@
                     
            /></nuxt-link>
       </li>
-      <li class="nav-item active mt-1">
+      <li class="nav-item active">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
          <span v-else><app-loader /></span>
       </li>
@@ -101,29 +97,25 @@
 import axios from 'axios'
 import newLoader from "~/components/loader.vue";
 export default {
-  components : {
-    'app-loader' : newLoader,
-  },
   data(){
     return{
       profile_pic : {},
      styleObject : {
        width : '0px'
-     },
-     loader : true,
+     },loader : true,
      company: {},
     }
   },
-  mounted(){
-    this.getProfile(),
-    this.getCompany()
+ mounted(){
+      this.getProfile(),
+      this.getCompany()
   },
   methods : {
     getProfile(){
-      this.$axios
+         this.$axios
         .get("https://hamlet.payfill.co/api/auth/admin")
         .then((res) => {
-          console.log(res.data.company);
+          console.log(res.data.profile);
           this.profile_pic = res.data.profile;
         });
     },
@@ -160,12 +152,12 @@ export default {
         font-family: 'Overpass', sans-serif;
         
     }
-    ul li{
-      margin-left: 1.5rem;
-    }
     .boxShadow{
        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
         background-color: rgba(255,255,255,1) !important;
+    }
+    ul li{
+      margin-left: 1.5rem;
     }
     .one{
         margin-left: 100px;
@@ -303,8 +295,11 @@ position: absolute;
     display: block;
   }
   .closebtn {
+ position: absolute;
  top: 1rem;
  right: 2rem;
+ font-size: 2rem !important; 
+ margin-left: 55px;
 }
 .one1{
     text-align: center !important;

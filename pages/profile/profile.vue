@@ -30,44 +30,23 @@
             </div>
             <div>
               <div class="one3">
-                <h3>General Information</h3>
+                <h3>Manager's Information</h3>
                 <hr />
                 <div class="grid">
-                  <p>Company Name</p>
-                  <p>{{this.company.company_name}}</p>
+                  <p>First Name</p>
+                  <p>{{this.profile.first_name}}</p>
                 </div>
                 <div class="grid">
-                  <p>Company Website</p>
-                  <p>{{this.company.company_website}}</p>
-                </div>
-                <div class="grid">
-                  <p>Email</p>
-                  <p>{{this.company.company_email}}</p>
-                </div>
-                <div class="grid">
-                  <p>Phone Number</p>
-                  <p>{{this.company.company_phone}}</p>
+                  <p>Last Name</p>
+                  <p>{{this.profile.last_name}}</p>
                 </div>
                 <div class="grid">
                   <p>Address</p>
-                  <p>{{this.company.company_address}}</p>
+                  <p>{{this.profile.address}}</p>
                 </div>
-                <div class="grid">
-                  <p>City</p>
-                  <p>{{this.company.city}}</p>
-                </div>
-                <div class="grid">
-                  <p>Zip Code</p>
-                  <p>{{this.company.zip_code}}</p>
-                </div>
-                <div class="grid">
-                  <p>State</p>
-                  <p>{{this.company.state}}</p>
-                </div>
-
                 <hr />
                 <span class="one9">
-                  <button class="btn1" @click="edititems(company)">Edit</button>
+                  <button class="btn1" @click="edititems(profile)">Edit</button>
                 </span>
               </div>
             </div>
@@ -75,51 +54,25 @@
           <div v-else>
             <form class="p-5">
               <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Company Name</label>
-                  <input type="text" class="form-control" v-model="companyInfo.company_name" />
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Company Website</label>
-                  <input type="text" class="form-control" v-model="companyInfo.company_website" />
+                <div class="form-group col-md-12">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" v-model="profileInfo.first_name" />
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Email</label>
-                  <input type="email" class="form-control" v-model="companyInfo.company_email" />
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Phone Number</label>
-                  <input type="number" class="form-control" v-model="companyInfo.company_phone" />
+                <div class="form-group col-md-12">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" v-model="profileInfo.last_name" />
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                   <label>Address</label>
-                  <input type="text" class="form-control" v-model="companyInfo.company_address" />
-                </div>
-                <div class="form-group col-md-6">
-                  <label>City</label>
-                  <input type="text" class="form-control" v-model="companyInfo.city" />
+                  <input type="text" class="form-control" v-model="profileInfo.address" />
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>State</label>
-                  <input type="text" class="form-control" v-model="companyInfo.state" />
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Zip Code</label>
-                  <input type="number" class="form-control" v-model="companyInfo.zip_code" />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Number of Employees</label>
-                  <input type="number" class="form-control" v-model="companyInfo.no_of_employees" />
-                </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                   <label>Profile Picture</label>
                   <input
                     type="file"
@@ -132,19 +85,12 @@
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for>Services</label>
-                  <textarea name id class="form-control" v-model="companyInfo.services"></textarea>
-                </div>
-              </div>
-
               <div style="text-align:center">
                 <button type="submit" class="btn btn2" @click="canceledit">Cancel</button>
                 <button
                   type="submit"
                   class="btn btn2"
-                  @click.prevent="updateCompany(companyInfo.id)"
+                  @click.prevent="updateProfile(profileInfo.id)"
                 >
                   <span v-if="isloading_1">Update</span>
                   <div v-else>
@@ -161,9 +107,9 @@
 </template>
 
 <script>
-import sidebar from "~/components/sidebar3.vue";
+import sidebar from "~/components/sidebar5.vue";
 import VueJwtDecode from "vue-jwt-decode";
-import navbar from "~/components/navbar3.vue";
+import navbar from "~/components/navbar5.vue";
 import swal from "sweetalert";
 import newLoader from "~/components/loader.vue";
 export default {
@@ -176,23 +122,17 @@ export default {
   data() {
     return {
       company: {},
+      profile: {},
       loader: true,
       user: {},
       isloading: true,
       isloading_1: true,
       edit: true,
-      companyInfo: {
-        company_name: "",
-        company_address: "",
-        company_phone: "",
-        company_email: "",
-        no_of_employees: "",
-        city: "",
-        state: "",
-        zip_code: "",
-        company_website: "",
-        services: "",
-        company_logo: {},
+      profileInfo: {
+        first_name: "",
+        last_name: "",
+        address: "",
+        profile_pic: {},
         // _method: "PUT",
       },
     };
@@ -202,6 +142,7 @@ export default {
     //  this.user = localStorage.getItem("jwt");
     console.log(this.user);
     this.getCompany();
+    this.getProfile();
     // this.getToken()
   },
   methods: {
@@ -211,71 +152,6 @@ export default {
         clearTimeout(timeout);
         timeout = setTimeout("location.reload(true", 3000);
       }
-    },
-    updateCompany(i) {
-      swal({
-        title: "Are you sure?",
-        text: "Once you Update, previous company information will be lost",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-        .then((willDelete) => {
-          if (willDelete) {
-            this.isloading_1 = false;
-            const formData = new FormData();
-            formData.append("company_name", this.companyInfo.company_name);
-            formData.append(
-              "company_address",
-              this.companyInfo.company_address
-            );
-            formData.append("company_email", this.companyInfo.company_email);
-            formData.append(
-              "company_website",
-              this.companyInfo.company_website
-            );
-            formData.append(
-              "no_of_employees",
-              this.companyInfo.no_of_employees
-            );
-            formData.append("city", this.companyInfo.city);
-            formData.append("state", this.companyInfo.state);
-            formData.append("zip_code", this.companyInfo.zip_code);
-            formData.append("services", this.companyInfo.services);
-            formData.append("company_logo", this.companyInfo.company_logo);
-            formData.append("company_phone", this.companyInfo.company_phone);
-            this.$axios
-              .post(`https://hamlet.payfill.co/api/company/${i}`, formData, {
-                headers: { Authorization: `Bearer ${this.user}` },
-              })
-              .then(
-                (res) => {
-                  console.log(res);
-                  this.$message({
-                    message: "Company Details Updated Successfully!",
-                    type: "success",
-                  });
-                  this.isloading_1 = true;
-                  // this.getallBlogs()
-                },
-                function (error) {
-                  console.log(error);
-                }
-              );
-            this.reload();
-          } else {
-            this.$message({
-              message: "Company Details remains the same !",
-              type: "info",
-            });
-          }
-        })
-        .catch((error) => {
-          this.$message({
-            message: "Error, Unable to update, Try again!",
-            type: "error",
-          });
-        });
     },
     getCompany() {
       this.$axios
@@ -292,17 +168,85 @@ export default {
           this.loader = false;
         });
     },
+    updateProfile(i) {
+      swal({
+        title: "Are you sure?",
+        text: "Once you Update, previous manager information will be lost",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.isloading_1 = false;
+            const formData = new FormData();
+            formData.append("first_name", this.profileInfo.first_name);
+            formData.append(
+              "last_name",
+              this.profileInfo.last_name
+            );
+            formData.append("address", this.profileInfo.address);
+            formData.append("profile_pic", this.profileInfo.profile_pic);
+        
+            this.$axios
+              .post(`https://hamlet.payfill.co/api/profile/${i}`, formData, {
+                headers: { Authorization: `Bearer ${this.user}` },
+              })
+              .then(
+                (res) => {
+                  console.log(res);
+                  this.$message({
+                    message: "Manager Profile Updated Successfully!",
+                    type: "success",
+                  });
+                  this.isloading_1 = true;
+                  // this.getallBlogs()
+                },
+                function (error) {
+                  console.log(error);
+                }
+              );
+            // this.reload();
+          } else {
+            this.$message({
+              message: "Manager Profile remains the same !",
+              type: "info",
+            });
+          }
+        })
+        .catch((error) => {
+          this.$message({
+            message: "Error, Unable to update, Try again!",
+            type: "error",
+          });
+        });
+    },
+    getProfile() {
+      this.$axios
+        .get("https://hamlet.payfill.co/api/auth/admin")
+        .then((res) => {
+          console.log(res.data.profile);
+          this.profile = res.data.profile;
+          //   for (let key in data) {
+          //     const details = data[key];
+          //     details.company.id = key;
+          //     this.company.unshift(details);
+          //   }
+          //   this.company = res.data.company;
+          this.loader = false;
+        });
+    },
     edititems(id) {
       this.edit = false;
-      this.companyInfo = id;
+      this.profileInfo = id;
     },
     canceledit() {
       this.edit = true;
     },
     upload() {
       var input = event.target;
-      this.companyInfo.company_logo = input.files[0];
-      console.log(this.companyInfo.company_logo);
+      this.profileInfo.profile_pic = input.files[0];
+      console.log(this.profileInfo.profile_pic);
     },
     // submitBtn() {
     //   this.loader = false;

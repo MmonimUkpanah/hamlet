@@ -1,8 +1,8 @@
 <template>
     <div class="one">
         <div class="one1">
-            <img :src="this.company.company_logo" alt class="w-99" />
-            <p :class="currentPage.includes('/company/companyoverview') ? activeClass : ''"><nuxt-link to="/company/companyoverview" style="text-decoration:none">Company Overview</nuxt-link></p>
+            <img :src="this.profile.profile_pic" alt class="w-99" />
+            <p :class="currentPage.includes('/profile/profile') ? activeClass : ''"><nuxt-link to="/profile/profile" style="text-decoration:none">Manager Profile</nuxt-link></p>
             <!-- <p :class="currentPage.includes('/company/taxinfo') ? activeClass : ''"><nuxt-link to="/company/taxinfo" style="text-decoration:none">Tax Info</nuxt-link></p>
             <p :class="currentPage.includes('/company/locations') ? activeClass : ''"><nuxt-link to="/company/locations" style="text-decoration:none">Locations</nuxt-link></p> -->
         </div>
@@ -14,22 +14,30 @@ export default {
     data(){
     return{
       activeClass : 'active',
-      company: {},
+      profile: {},
     }
 },
+    mounted() {
+        this.getProfile();
+    },
     methods: {
-        getCompany() {
-        this.$axios
-            .get("https://hamlet.payfill.co/api/auth/admin")
-            .then(res => {
-            console.log(res.data.company);
-            this.company = res.data.company;
-            });
-        }
+        getProfile() {
+      this.$axios
+        .get("https://hamlet.payfill.co/api/auth/admin")
+        .then((res) => {
+          console.log(res.data.profile);
+          this.profile = res.data.profile;
+          //   for (let key in data) {
+          //     const details = data[key];
+          //     details.company.id = key;
+          //     this.company.unshift(details);
+          //   }
+          //   this.company = res.data.company;
+          this.loader = false;
+        });
     },
-    created() {
-        this.getCompany();
     },
+    
  computed : {
     currentPage(){
       return this.$route.path

@@ -27,7 +27,7 @@ export default {
   methods: {
         getCompany() {
         this.$axios
-            .get("https://hamlet-hrm.herokuapp.com/api/auth/admin")
+            .get("https://hamlet.payfill.co/api/auth/admin")
             .then(res => {
             console.log(res.data.company);
             this.company = res.data.company;

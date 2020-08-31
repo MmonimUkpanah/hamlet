@@ -161,9 +161,10 @@ export default {
        width : '0px'
      }
       }
-    },
-    mounted(){
-      this.$axios.get(`http://localhost:9000/api/getemployee/${this.$route.params.name}`).then(res => {
+    }, 
+    methods:{
+        getEmployee(){
+            this.$axios.get(`https://hamlet.payfill.co/api/getemployee/${this.$route.params.name}`).then(res => {  
               this.employee=res.data
               this.job=res.data[0].job_details
               this.contact=res.data[0].contact_info

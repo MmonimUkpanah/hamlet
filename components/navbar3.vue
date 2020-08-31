@@ -9,8 +9,25 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <nuxt-link to="/dashboard" class="nav-link" style="color: #0065FC" >Company Name</nuxt-link>
+       <!-- <li v-if="$auth.loggedIn">
+      {{auth.user.email}}
+      <span class="ml-3">Log out</span>
+    </li> -->
+    <li class="nav-item active">
+        <li class="nav-item active">
+        <nuxt-link to="/profile/profile"><img
+                      :src="this.profile_pic.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="40px"
+                      height="40px"
+                      
+           /></nuxt-link>
+      </li>
+
+      <li class="nav-item active mt-1">
+        <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+         <span v-else><app-loader /></span>
       </li>
       
     </ul>
@@ -33,8 +50,31 @@
             </div>
         
            <div class="one1">
-            <img src="~/assets/Group 58.png" alt="" style="margin-bottom:2rem">
-            <p><nuxt-link to="/company/companyoverview" style="text-decoration:none; color : #FFFFFF; margin-top:2rem !important"><h5 style="margin-bottom:1rem">Company Overview</h5> </nuxt-link></p>
+            
+            <img :src="this.company.company_logo" alt class="w-50" style="margin-bottom:1rem" />
+            <p><nuxt-link to="/company/company-overview" style="text-decoration:none; color : #FFFFFF; margin-top:2rem !important"><h5 style="margin-bottom:1rem">Company Overview</h5> </nuxt-link></p>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+              <!-- <li v-if="$auth.loggedIn">
+              {{auth.user.email}}
+              <span class="ml-3">Log out</span>
+            </li> -->
+            <li class="nav-item active">
+      
+        <nuxt-link to="/profile/profile"><img
+                      :src="this.profile_pic.profile_pic"
+                      alt
+                      class="rounded-circle"
+                      width="50px"
+                      height="50px"
+                    
+           /></nuxt-link>
+      </li>
+              <li class="nav-item active">
+                <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
+                <span v-else><app-loader /></span>
+              </li>
+              
+            </ul>
             <!-- <p><nuxt-link to="/company/taxinfo" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Tax Info</h5></nuxt-link></p>
             <p><nuxt-link to="/company/locations" style="text-decoration:none;  color : #FFFFFF"><h5 style="margin-bottom:1rem">Locations</h5></nuxt-link></p> -->
         </div>
@@ -58,22 +98,56 @@
    
 </template>
 <script>
+import axios from 'axios'
+import newLoader from "~/components/loader.vue";
 export default {
   data(){
     return{
+      profile_pic : {},
      styleObject : {
        width : '0px'
-     }
+     },loader : true,
+     company: {},
     }
   },
+  mounted(){
+      this.getProfile(),
+      this.getCompany()
+  },
   methods : {
+    getProfile(){
+         this.$axios
+        .get("https://hamlet.payfill.co/api/auth/admin")
+        .then((res) => {
+          console.log(res.data.profile);
+          this.profile_pic = res.data.profile;
+        });
+    },
     openNav(){
       this.styleObject.width = '100%'
     },
     closeNav(){
       this.styleObject.width = '0px'
       // console.log('clicked')
-    }
+    },
+    async logOut(){
+      this.loader = false
+     await this.$auth.logout();
+     localStorage.removeItem("jwt");
+    this.$router.push('/signin')
+     this.$message({
+          message:  "You Logged out successfully!",
+          type: 'success'
+        })
+    },
+    getCompany() {
+        this.$axios
+            .get("https://hamlet.payfill.co/api/auth/admin")
+            .then(res => {
+            console.log(res.data.company);
+            this.company = res.data.company;
+            });
+        }
   }
 }
 </script>>
@@ -81,6 +155,9 @@ export default {
     *{
         font-family: 'Overpass', sans-serif;
         
+    }
+    ul li{
+      margin-left: 1.5rem;
     }
     .boxShadow{
        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
@@ -209,6 +286,9 @@ position: absolute;
   .mobileView{
     display: block;
   }
+  .one1{
+    text-align: center !important;
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 578px) {
@@ -222,6 +302,9 @@ position: absolute;
  top: 1rem;
  right: 2rem;
 }
+.one1{
+    text-align: center !important;
+  }
 }
 @media only screen and (min-width: 710px) and (max-width: 768px){
     .one{
