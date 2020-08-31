@@ -133,8 +133,8 @@ export default {
       }
     ]
   ],
-  axios: { 
-    baseURL: "https://hamlet.payfill.co/api" 
+  axios: {
+    baseURL: "https://hamlet.payfill.co/api"
     // requestInterceptor: (config, { store }) => {
     //    config.headers.common['Authorization'] = `Bearer ${store.getters['auth/token']}`;
     // }

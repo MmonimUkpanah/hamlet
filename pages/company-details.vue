@@ -94,7 +94,8 @@
                     <input
                       type="text"
                       name="state"
-                      class="form-control" 
+                      class="form-control"
+                      id
                       placeholder="state"
                       v-model="companyInfo.state"
                       v-validate="'required'"
@@ -109,7 +110,8 @@
                     <input
                       type="email"
                       name="email"
-                      class="form-control" 
+                      class="form-control"
+                      id
                       placeholder="company email"
                       v-model="companyInfo.company_email"
                       v-validate="'required|email'"
@@ -535,8 +537,8 @@ export default {
       formData.append("services", this.companyInfo.services);
       formData.append("company_logo", this.companyInfo.profile_pic);
       formData.append("company_phone", this.companyInfo.company_phone);
-      axios 
-        .post("https://hamlet.payfill.co/api/company", formData, { 
+      axios
+        .post("https://hamlet.payfill.co/api/company", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.user}`,
@@ -609,7 +611,6 @@ export default {
 </script>
 
 <style scoped>
- 
 .wrapper {
   background: linear-gradient(
       to right,
@@ -668,7 +669,7 @@ textarea {
   background-color: #ffffff;
   border: 1px solid #0065fc;
   outline: none !important;
-  border-radius: 50%;  
+  border-radius: 50%;
 }
 .file-border {
   padding: 1rem 5rem 1rem 1rem;
@@ -940,4 +941,4 @@ p {
     margin-left: 1rem;
   }
 }
-</style>
+</style> 

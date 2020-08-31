@@ -6,21 +6,16 @@
 <!-- siddebar -->
             <div class="one">
         <div class="one1">
-
-            <div v-for="item in employee" :key="item.id">
-        <img  v-if="item.profile_pic"  :src="`${item.profile_pic  || '~/assets/Group 58.png'}`" alt="">
-           </div>
-             <p ><span style="cursor:pointer" @click='Personal()'  class="text-primary">Personal Info</span></p>
-            <p ><span style="cursor:pointer"  @click='Contact()' class="text-primary">Contact info</span></p>
-            <p ><span style="cursor:pointer"  @click='Job()' class="text-primary">Job Details</span></p>
-            <p ><button class="btn border-primary  text-primary">Homepage</button></p>
-
-    </div>
+            <img src="~/assets/Group 58.png" alt="">
+            <p ><span style="cursor:pointer" class="text-primary">Personal Info</span></p>
+            <p ><nuxt-link to="/singleemployee/employmentdetails" style="text-decoration:none">Contact info</nuxt-link></p>
+            <p ><nuxt-link to="/singleemployee/employmentdetails" style="text-decoration:none">Job Details</nuxt-link></p>
+        </div>
     </div>
 
-    <div  class="one2 d-">
+    <div  class="one2 ">
       <div class="one6">
-      <div class="one7 ">
+      <div class="one7">
           <h2><div v-for="item in employee" :key="item.id">
              {{ item.first_name + " " + item.other_names }}
           </div></h2>
@@ -32,17 +27,16 @@
                   Actions
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" data-toggle="modal" data-target="#modelId">Edit profile</a>
-                  <a class="dropdown-item" href="#" >Terminate</a>
+                  <a class="dropdown-item" href="#">Edit profile</a>
+                  <a class="dropdown-item" href="#">Terminate</a>
               </div>
           </div>
       </div>
   </div>
-
-       <div id="Personal"  >
-      <div    class="one3" v-for="(data, index) in employee" :key="index">
-        <h3>Personal Info</h3>
-        <hr>
+       <div >
+      <div class="one3" v-for="(data, index) in employee" :key="index">
+      <h3>Personal Info</h3>
+      <hr>
       <div class="grid">
           <p> Gender</p>
           <p>{{data.gender}}</p>
@@ -63,74 +57,10 @@
           <p>City/Town</p>
           <p>{{data.city}}</p>
       </div>
-      <hr>
-  </div>
-        </div>
-
-
-       <div id="Job" style="display: none;"   >
-      <div class="one3">
-        <h3>Job Details</h3>
-        <hr>
-      <div class="grid">
-          <p>Job Title</p>
-          <p>{{data.job_title}}</p>
-      </div>
-      <div class="grid">
-          <p>Employment Type</p>
-          <p>{{data.employment_type}}</p>
-      </div>
-      <div class="grid">
-          <p>Salary</p>
-          <p>{{data.salary}}</p>
-      </div>
-      <div class="grid">
-          <p>Date hired</p>
-          <p>{{data.date_hired}}</p>
-      </div>
-      <div class="grid">
-          <p>Description</p>
-          <p>{{data.description}}</p>
-      </div>
-      <div class="grid">
-          <p>Department</p>
-          <p>{{data.department}}</p>
-      </div>
-      <div class="grid">
-          <p>Employment Classification</p>
-          <p>{{data.employment_classification}}</p>
-      </div>
-      <div class="grid">
-          <p> Job Category</p>
-          <p>{{data.job_category}}</p>
-      </div>
-      <div class="grid">
-          <p>Work Location</p>
-          <p>{{data.work_location}}</p>
-      </div>
-      <hr>
-  </div>
-      </div>
-       <div id="Contact"   style="display: none;" >
-    <div class="one3">
-      <h3>Contact Info</h3>
-      <hr>
-      <div class="grid">
-          <p>Phone</p>
-          <p>{{data.phone}}</p>
-      </div>
-      <div class="grid">
-          <p>Email</p>
-          <p>{{data.email}}</p>
-      </div>
-      <div class="grid">
-          <p>Emergency Contact</p>
-          <p>{{data.emergency_contact}}</p>
-      </div>
 
       <hr>
   </div>
-    </div>
+      </div>
 
 </div>
         </div>
@@ -139,7 +69,6 @@
     </div>
 
 
-    </div>
 </template>
 
 <script>
@@ -155,51 +84,28 @@ export default {
     data() {
       return {
         employee:[],
-        job:[],
-        contact:[],
         styleObject : {
        width : '0px'
      }
       }
-    }, 
-    methods:{
-        getEmployee(){
-            this.$axios.get(`https://hamlet.payfill.co/api/getemployee/${this.$route.params.name}`).then(res => {  
-              this.employee=res.data
-              this.job=res.data[0].job_details
-              this.contact=res.data[0].contact_info
-        });
     },
     methods:{
-
+        getEmployee(){
+            this.$axios.get(`https://hamlet.payfill.co/api/employee/${this.$route.params.name}`).then(res => {
+              this.employee=res.data
+        });
+        },
         openNav(){
       this.styleObject.width = '100%'
     },
     closeNav(){
       this.styleObject.width = '0px'
+      // console.log('clicked')
     }
-,
-Personal()
-      {
-
-      document.getElementById('Personal').style.display='block';
-      document.getElementById('Job').style.display='none';
-      document.getElementById('Job').style.display='none';
-      },
-      Job()
-      {
-        document.getElementById('Personal').style.display='none';
-        document.getElementById('Job').style.display='block';
-        document.getElementById('Contact').style.display='none';
-      },
-      Contact()
-      {
-        document.getElementById('Personal').style.display='none';
-        document.getElementById('Job').style.display='none';
-        document.getElementById('Contact').style.display='block';
-      }
     },
-
+    created(){
+        this.getEmployee()
+    }
 
 }
 </script>
