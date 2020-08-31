@@ -58,9 +58,10 @@
 
               <hr />
               <div class="one4">
+ 
                 <!-- <nuxt-link to="/employee-details" class="btn1">Back</nuxt-link> -->
                 <button type="submit" class="btn2">
-                  <span v-if="isLoading">Next</span>
+                  <span v-if="isLoading">Next</span> 
                   <app-loader v-else />
                 </button>
               </div>
@@ -72,25 +73,62 @@
   </div>
 </template>
 
-<script>
-import sidebar from "~/components/sidebar.vue";
-import navbar from "~/components/navbar.vue";
-import swal from "sweetalert";
-import newLoader from "~/components/loader.vue";
-export default {
-  // middleware : ['auth'],
-  components: {
-    "app-sidebar": sidebar,
-    "app-navbar": navbar,
-    "app-loader": newLoader,
-  },
-  data() {
-    return {
-      contactInfo: {
-        phone: "",
-        email: "",
-        emergency_contact: "",
-        employee_id: "",
+<script> 
+  import sidebar from '~/components/sidebar.vue';
+  import navbar from '~/components/navbar.vue';
+  import swal from "sweetalert";
+  import newLoader from "~/components/loader.vue";
+  export default {
+    // middleware : ['auth'],
+    components:{
+      'app-sidebar':sidebar,
+      'app-navbar':navbar,
+      "app-loader": newLoader,
+    },
+    data(){
+      return{
+        contactInfo: {
+          phone: "",
+          email: "",
+          emergency_contact: "",
+          employee_id: this.$route.params.name,
+        },
+        isLoading : false
+      }
+    },
+    computed: {
+      dataIsValid() {
+        let hasInvalidData = false;
+        Object.keys(this.contactInfo).forEach(key => {
+          if (!this.contactInfo[key]) hasInvalidData = true;
+          return false;
+        });
+
+        return !hasInvalidData;
+      }
+    },
+    methods:{
+      addContactInfo() {
+        // if (!this.dataIsValid) {
+        //   return;
+        // }
+
+        this.isLoading = true
+        this.$axios.post("http://localhost:9000/api/contact-info", this.contactInfo).then((res) => {
+          console.log(res.data);
+          swal({
+            title: "Success",
+            text: "You have added your employee's contact information successfully!",
+            icon: "success",
+            button: false
+          });
+          this.isLoading = false;
+          this.$router.push(`/job-details/${this.$route.params.name}`);
+        }).catch(e => {
+          this.isLoading = false;
+        })
+
+ 
       },
       isLoading: true,
       submitted: false,

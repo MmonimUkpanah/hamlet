@@ -28,7 +28,7 @@
                   {{ errors.first("job-title") }}
                 </small>
             </div>
-            
+
             <div class="grid">
               <p>Employment Type</p>
               <div class="one7">
@@ -103,7 +103,7 @@
                 </small>
             </div>
             <div class="grid">
-              <p>Salary (In Naira)</p>
+              <p>Salary (In Naira)</p> 
               <input  class="one6 form-control" name="salary" v-model="jobDetails.salary"
               v-validate="'required|numeric'"
                   :class="{ 'is-invalid': submitted && errors.has('salary') }"
@@ -128,8 +128,9 @@
                   class="invalid-feedback"
                 >
                   {{ errors.first("description") }}
-                </small>
+                </small> 
             </div>
+
             <div class="grid">
               <p>Job Category</p>
               <div class="input-group">
@@ -172,6 +173,14 @@
                 </small>
               </div>
             </div>
+            <div class="grid" >
+              <p>Description</p>
+              <div class="input-group">
+                 <textarea id="my-textarea"  class="form-control one6" cols="30" rows="10" v-model="jobDetails.description"></textarea>
+
+              </div>
+            </div>
+
 
             <hr>
             <div class="one4">
@@ -216,13 +225,15 @@
         jobDetails:{
           employment_type:"",
           job_title: "",
-          salary: "",
+          salary: "₦",
           date_hired: "",
           description: "",
           department: "",
           job_category: "",
           work_location: "",
-          employment_classification: ""
+          employment_classification: "",
+          employee_id: this.$route.params.name,
+
         },
         isLoading : true,
         submitted: false,
@@ -238,14 +249,14 @@
         this.radio1 = false;
         this.radio2 = true;
       },
-      addJobDetails(){
+      addJobDetails(){ 
         console.log("clicked")
       this.submitted = true;
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           console.log("Login");
          this.isLoading = false;
-         this.$axios.post("https://hamlet.payfill.co/api/job-details", this.jobDetails).then((res) => {
+         this.$axios.post("https://hamlet.payfill.co/api/job-details", this.jobDetails).then((res) => {  
           console.log(res.data);
           this.$message({
           message: "You've added your employee's job details!",
@@ -261,11 +272,12 @@
         }
       })},
       getDepartment() {
-      this.$axios
-        .get("https://hamlet.payfill.co/api/auth/admin")
+      this.$axios 
+        .get(`http://localhost:9000/api/department/${this.$route.params.name}`)
         .then(res => {
           console.log(res.data);
-          this.departments = res.data.company.company_departments;this.show = true;
+          this.departments = res.data;
+          this.show = true; 
         });
     },
     },
@@ -277,6 +289,7 @@
 </script>
 
 <style scoped>
+
   *{
     box-sizing: border-box;
     margin: 0;

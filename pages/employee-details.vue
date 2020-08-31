@@ -113,6 +113,7 @@
                   class="invalid-feedback"
                 >{{ errors.first("city") }}</small>
               </div>
+ 
               <div class="grid">
                 <p>Age</p>
                 <input
@@ -157,7 +158,7 @@
                 <small
                   v-if="submitted && errors.has('qualifications')"
                   class="invalid-feedback"
-                >{{ errors.first("qualifications") }}</small>
+                >{{ errors.first("qualifications") }}</small> 
               </div>
               <div class="grid">
                 <p>Profile Picture</p>
@@ -203,6 +204,7 @@
 </template>
 
 <script>
+ 
 import sidebar from "~/components/sidebar.vue";
 import navbar from "~/components/navbar.vue";
 import swal from "sweetalert";
@@ -242,7 +244,7 @@ export default {
       this.submitted = true;
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          console.log("Login");
+          console.log("Login"); 
           this.isLoading = false;
           const formData = new FormData();
           formData.append("first_name", this.employeeDetails.first_name);

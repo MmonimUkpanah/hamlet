@@ -71,6 +71,7 @@
             </div>
 
             <div class="col-sm-10 pl-3">
+ 
               <table class="table table-responsive table-bordered table-hover border-0">
                 <tr>
                   <th scope="col">#</th>
@@ -117,7 +118,7 @@
                       :title="`View ${employee.first_name} ${employee.other_names}`"
                       class="btn text-primary fa fa-eye"
                     ></nuxt-link>
-                  </td>
+                  </td> 
                 </tr>
               </table>
               
@@ -165,12 +166,12 @@ export default {
       this.singleEmployee = data;
     },
     getEmployees() {
-      this.$axios
+      this.$axios 
         .get("https://hamlet.payfill.co/api/auth/admin")
         .then((res) => {
           console.log(res.data.employees);
-          this.employees = res.data.employees;
-          this.loader = false;
+          this.employees = res.data;
+          this.loader = false; 
         });
     },
     viewEmployee() {
@@ -179,7 +180,12 @@ export default {
   },
   mounted() {
     this.getEmployees();
-  },
+  }, 
+  mounted(){
+    this.user = this.$auth.$storage.getLocalStorage("user").id;
+    console.log(this.user)
+    this.getEmployees()
+  } 
 };
 </script>
 
