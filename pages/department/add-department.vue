@@ -358,7 +358,7 @@ export default {
   border-radius: 5px;
   background: #ffffff;
   margin-top: 5rem;
-  height: 100vh;
+  height: auto;
   margin-left: 25%;
 }
 hr {
@@ -384,6 +384,7 @@ hr {
   padding-right: 70px;
   padding-bottom: 20px;
   padding-top: 20px;
+  
 }
 
 .one3 h3 {

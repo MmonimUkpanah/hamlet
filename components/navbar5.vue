@@ -15,14 +15,14 @@
     </li> -->
      <li class="nav-item active">
       
-        <img
+         <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
-                      width="50px"
-                      height="50px"
-                      style="margin-left:.5rem"
-           />
+                      width="40px"
+                      height="40px"
+                      
+           /></nuxt-link>
       </li>
       <li class="nav-item active mt-1">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
@@ -49,7 +49,7 @@
             </div>
         
            <div class="one1">
-             <img :src="this.company.company_logo" alt class="w-99" style="margin-bottom:1rem" />
+             <img :src="this.company.company_logo" alt class="w-50" style="margin-bottom:1rem" />
             <p><nuxt-link to="/department/add-department" style="text-decoration:none; color : #FFFFFF"><h5 style="margin-bottom:1rem">Add Department</h5> </nuxt-link></p>
             
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -58,16 +58,14 @@
       <span class="ml-3">Log out</span>
     </li> -->
     <li class="nav-item active">
-      
-        <img
+        <nuxt-link to="/profile/profile"><img
                       :src="this.profile_pic.profile_pic"
                       alt
                       class="rounded-circle"
                       width="50px"
                       height="50px"
-                      style=" margin-bottom:1rem"
-                      
-           />
+                    
+           /></nuxt-link>
       </li>
       <li class="nav-item active">
         <button v-if="loader" @click="logOut" class="btn1">Log Out</button>
