@@ -59,7 +59,7 @@
               <hr />
               <div class="one4">
                 <!-- <nuxt-link to="/employee-details" class="btn1">Back</nuxt-link> -->
-                <button type="submit" class="btn2 form-control">
+                <button type="submit" class="btn2">
                   <span v-if="isLoading">Next</span>
                   <app-loader v-else />
                 </button>

@@ -52,7 +52,7 @@
             <hr />
             <br />
             <p class="text-center">
-              Not a customer yet?
+              Not a user yet?
               <nuxt-link to="/signup">
                 <button class="btn2" :disabled="isValid">Sign up</button>
               </nuxt-link>
@@ -105,13 +105,10 @@ export default {
       }
       // this.login = true
       this.submitted = true;
-      this.$validator.validateAll().then((valid) => {
+      this.$validator.validateAll().then( async (valid) => {
         if (valid) {
           console.log("Login");
-          this.isValid = true;
-        }
-      });
-      try {
+            try {
         let response = await this.$auth.loginWith("local", {
           data: {
             email: this.email,
@@ -156,6 +153,9 @@ export default {
         // }
         this.loader = true;
       }
+        }
+      });
+    
     },
   },
 };
